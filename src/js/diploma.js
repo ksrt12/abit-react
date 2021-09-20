@@ -6,7 +6,7 @@
  * @for ITMO University
  */
 
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { sha256 } from 'js-sha256';
 

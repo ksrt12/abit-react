@@ -10,15 +10,15 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { sha256 } from 'js-sha256';
 
+import TableHead from "../UI/TableHead";
+import Olymps from "../UI/Olymps";
+
 import { WLS, fromWLS, RSROLYMP, SUBJECTS } from "./constants";
 
 import { checkBVI } from "./bvi";
 import { colorBVI, setPinkColor } from "./colors";
 
-import { isTable } from "./utils";
-
-import TableHead from "../UI/TableHead";
-import Olymps from "../UI/Olymps";
+import { isTable, getEGEfromInput } from "./utils";
 
 let trs = [];
 
@@ -91,18 +91,15 @@ function loadDiplomaList(year, pid) {
 
 function searchOlymps() {
     const personID = sha256(Person.fullName());
-    //"b3d5e8abe9b3bcfb27cc3d4a5e612df00ed469b90ec574a931aa1255fa8a924f";
+    //const personID = "b3d5e8abe9b3bcfb27cc3d4a5e612df00ed469b90ec574a931aa1255fa8a924f";
     const currYEAR = new Date().getFullYear();
     for (let YEAR = currYEAR; YEAR >= currYEAR - 4; YEAR--) {
         loadDiplomaList(YEAR, personID);
     }
 }
 
-function textFrom(row, cell) {
-    return row.cells[cell].innerText;
-}
-
 function updateStatus(stream) {
+    const textFrom = (row, cell) => row.cells[cell].innerText;
     for (let i of document.querySelector("tbody").rows) {
         let new_status = checkBVI(stream,
             textFrom(i, 5),
@@ -113,10 +110,6 @@ function updateStatus(stream) {
         i.cells[6].innerHTML = new_status;
         colorBVI(i, new_status);
     }
-}
-
-function getEGEfromInput() {
-    return document.querySelectorAll(".ege > form > p > input");
 }
 
 function doSearch() {
@@ -201,12 +194,6 @@ function loadFromWLS() {
     checkTableIsLoad();
 }
 
-if (fromWLS) {
-    window.addEventListener("DOMContentLoaded", loadFromWLS);
-} else {
-    window.addEventListener("load", () => checkData(false));
-}
-
 function InsertTable() {
     const caption = Person.getDName();
     document.title = caption;
@@ -221,6 +208,12 @@ function InsertTable() {
         document.getElementById('results')
     );
     isTable().after(document.createElement("br"));
+}
+
+if (fromWLS) {
+    window.addEventListener("DOMContentLoaded", loadFromWLS);
+} else {
+    window.addEventListener("load", () => checkData(false));
 }
 
 export { doSearch, checkData, updateStatus };

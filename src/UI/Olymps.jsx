@@ -21,9 +21,8 @@ function makeLink(code, year) {
 }
 
 function OlympRow(tds, key) {
-    const color = colorBVI(null, tds[6]);
     return (
-        <tr style={{ backgroundColor: color }} key={key}>
+        <tr style={{ backgroundColor: colorBVI(null, tds[6]) }} key={key}>
             {tds.map((td, i) => { return (<td key={i}>{td}</td>); })}
         </tr>
     );
@@ -31,11 +30,10 @@ function OlympRow(tds, key) {
 
 function Olymps(year, codes) {
     const trs = [];
-
     for (const d of codes) {
         if (d.form > 9) {
             const olymp = getSubTitles(d.oa, d.form);
-            const newRow = OlympRow([
+            trs.push(OlympRow([
                 olymp[0],
                 olymp[1],
                 olymp[2],
@@ -43,12 +41,9 @@ function Olymps(year, codes) {
                 makeLink(d.code, year),
                 d.form,
                 olymp[4],
-            ], d.code);
-
-            trs.push(newRow);
+            ], d.code));
         }
     }
-
     return trs;
 }
 

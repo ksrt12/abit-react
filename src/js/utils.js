@@ -15,8 +15,12 @@ function getSort(event) {
     }
 }
 
+function getEGEfromInput() {
+    return document.querySelectorAll(".ege > form > p > input");
+}
+
 function isTable() {
     return document.querySelector("table");
 }
 
-export { getSort, isTable };
+export { getSort, getEGEfromInput, isTable };

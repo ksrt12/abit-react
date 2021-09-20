@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import './olymp.css';
+import Links from "./UI/Links";
+import SearchForm from "./UI/SearchForm";
+import Copyright from "./UI/Copyright";
+import { fromWLS } from "./js/constants";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Links />
+      <div className="main">
+        <br />
+        {fromWLS ? null : (<SearchForm />)}
+        <div id="results"></div>
+      </div>
+      <Copyright />
     </div>
   );
 }

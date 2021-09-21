@@ -1,6 +1,6 @@
 {
   "name": "abit-react",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "private": true,
   "homepage": "https://snegiry.art/abit-react",
   "dependencies": {
@@ -14,9 +14,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "getlast": "git show -s --format=\"%h %s\"",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build -m \"$(git show -s --format='Update from %h: %s')\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

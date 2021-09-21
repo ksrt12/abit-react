@@ -6,11 +6,8 @@
  * @for ITMO University
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
 import { sha256 } from 'js-sha256';
-
-import TableHead from "../UI/TableHead";
+import { InsertTable, RemoveTable } from "../UI/FullTable";
 import Olymps from "../UI/Olymps";
 
 import { WLS, fromWLS, RSROLYMP, SUBJECTS } from "./constants";
@@ -142,23 +139,18 @@ function doSearch() {
 }
 
 function checkData(reset) {
-    let is_table = isTable();
-    if (is_table) {
+    if (isTable()) {
         if (reset) {
-            ReactDOM.unmountComponentAtNode(document.getElementById('results'));
+            RemoveTable();
             document.title = "Олимпиады РСОШ";
             trs = [];
             for (let j of getEGEfromInput()) {
                 j.value = "";
-                setPinkColor(j.id);
+                setPinkColor(j.id, false);
             }
         } else {
             doSearch();
         }
-    } else {
-        const LN = document.querySelector("#LN").value.length;
-        const FN = document.querySelector("#FN").value.length;
-        document.querySelector("button").disabled = !Boolean(LN && FN);
     }
 }
 
@@ -177,7 +169,7 @@ function checkTableIsLoad() {
 
 function checkTable() {
     if (trs.length) {
-        InsertTable();
+        InsertTable(Person.getDName(), trs);
     } else {
         if (params.LN) {
             alert(`Олимпиад РСОШ абитуриента\n${Person.getDName()} не найдено!`);
@@ -194,26 +186,8 @@ function loadFromWLS() {
     checkTableIsLoad();
 }
 
-function InsertTable() {
-    const caption = Person.getDName();
-    document.title = caption;
-    ReactDOM.render(
-        <table id="table" rules="all" border="all">
-            <caption>{caption}</caption>
-            <TableHead />
-            <tbody>
-                {trs}
-            </tbody>
-        </table>,
-        document.getElementById('results')
-    );
-    isTable().after(document.createElement("br"));
-}
-
 if (fromWLS) {
     window.addEventListener("DOMContentLoaded", loadFromWLS);
-} else {
-    window.addEventListener("load", () => checkData(false));
 }
 
 export { doSearch, checkData, updateStatus };

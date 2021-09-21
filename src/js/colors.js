@@ -1,7 +1,7 @@
 import { bvi, sto } from "./constants";
 import { yesconf } from "./diploma";
 
-function setPinkColor(id, is_empty = false) {
+function setPinkColor(id, is_empty) {
     setBgColor(document.querySelector(`[for=${id}]`), (is_empty) ? "pink" : "");
 }
 

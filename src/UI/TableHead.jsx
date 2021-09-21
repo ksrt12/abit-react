@@ -14,10 +14,7 @@ function TableHead() {
     return (
         <thead>
             <tr>
-                {heads.map(th => {
-                    return (
-                        <th key={th} onClick={getSort}>{th}</th>);
-                })}
+                {heads.map(th => (<th key={th} onClick={getSort}>{th}</th>))}
                 <th id="stream">
                     <MakeSelector />
                 </th>

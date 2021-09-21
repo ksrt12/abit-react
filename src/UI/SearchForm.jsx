@@ -14,15 +14,13 @@ function EgeSubj(props) {
 function EgeForm() {
     const names = Object.keys(SUBJECTS);
     const form = arr => {
-        return arr.map(name => {
-            return (
-                <EgeSubj
-                    key={SUBJECTS[name]}
-                    id={SUBJECTS[name]}
-                    name={name}
-                />
-            );
-        });
+        return arr.map(name => (
+            <EgeSubj
+                key={SUBJECTS[name]}
+                id={SUBJECTS[name]}
+                name={name}
+            />
+        ));
     };
 
     return (
@@ -53,14 +51,12 @@ function SearchForm() {
             <div className="search">
                 <div className="fio" onChange={() => checkData(true)} >
                     <form id="fio_form" autoComplete="on" onKeyUp={e => checkFio(e.target.form)}>
-                        {fio.map(obj => {
-                            return (
-                                <p key={obj.id}>
-                                    <label htmlFor={obj.id}>{obj.name}</label>
-                                    <input type="text" id={obj.id} placeholder={obj.placeholder} />
-                                </p>
-                            );
-                        })}
+                        {fio.map(obj => (
+                            <p key={obj.id}>
+                                <label htmlFor={obj.id}>{obj.name}</label>
+                                <input type="text" id={obj.id} placeholder={obj.placeholder} />
+                            </p>
+                        ))}
                         <p>
                             <label htmlFor="BD">Дата рождения</label>
                             <input type="date" id="BD" max="2005-01-01" min="1996-01-01" defaultValue="2002-01-01" />

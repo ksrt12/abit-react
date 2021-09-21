@@ -24,7 +24,7 @@ function makeLink(code, year) {
 function OlympRow(tds, key) {
     return (
         <tr style={{ backgroundColor: colorBVI(null, tds[6]) }} key={key}>
-            {tds.map((td, i) => { return (<td key={i}>{td}</td>); })}
+            {tds.map((td, i) => (<td key={i}>{td}</td>))}
         </tr>
     );
 }

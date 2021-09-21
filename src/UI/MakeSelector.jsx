@@ -23,10 +23,7 @@ function MakeSelector() {
 
     return (
         <select autoFocus={true} onChange={upd}>
-            {streams.map(val => {
-                return (
-                    <option key={val} value={val}>{val}</option>);
-            })}
+            {streams.map(val => (<option key={val} value={val}>{val}</option>))}
         </select>
     );
 };

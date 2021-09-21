@@ -1,3 +1,4 @@
+import React from "react";
 import './olymp.css';
 import Links from "./UI/Links";
 import SearchForm from "./UI/SearchForm";

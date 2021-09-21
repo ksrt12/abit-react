@@ -1,3 +1,4 @@
+import React from "react";
 import { informatics, physics, chemistry, social } from "../js/constants";
 import { updateStatus } from "../js/diploma";
 

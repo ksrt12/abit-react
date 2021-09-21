@@ -1,3 +1,4 @@
+import React from "react";
 import { RSROLYMP } from "../js/constants";
 import { colorBVI } from "../js/colors";
 import { checkBVI } from "../js/bvi";

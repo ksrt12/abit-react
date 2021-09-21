@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { checkData, doSearch } from "../js/diploma";
 import { SUBJECTS } from "../js/constants";
 

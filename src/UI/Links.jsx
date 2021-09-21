@@ -1,3 +1,4 @@
+import React from "react";
 import pdf2021 from "../files/2021.pdf";
 import pdf2020 from "../files/2020.pdf";
 import pdf2019 from "../files/2019.pdf";

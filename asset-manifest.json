@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/abit-react/static/css/main.20c82ce0.chunk.css",
-    "main.js": "/abit-react/static/js/main.0360aaa7.chunk.js",
-    "main.js.map": "/abit-react/static/js/main.0360aaa7.chunk.js.map",
+    "main.js": "/abit-react/static/js/main.c275b177.chunk.js",
+    "main.js.map": "/abit-react/static/js/main.c275b177.chunk.js.map",
     "runtime-main.js": "/abit-react/static/js/runtime-main.2872874f.js",
     "runtime-main.js.map": "/abit-react/static/js/runtime-main.2872874f.js.map",
     "static/js/2.7bcf102b.chunk.js": "/abit-react/static/js/2.7bcf102b.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.2872874f.js",
     "static/js/2.7bcf102b.chunk.js",
     "static/css/main.20c82ce0.chunk.css",
-    "static/js/main.0360aaa7.chunk.js"
+    "static/js/main.c275b177.chunk.js"
   ]
 }

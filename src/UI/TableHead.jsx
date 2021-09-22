@@ -18,7 +18,7 @@ function TableHead() {
     return (
         <thead>
             <tr>
-                {heads.map(th => (<MakeTh key={th} th={th} />))}
+                {heads.map(th => <MakeTh key={th} th={th} />)}
                 <th id="stream">
                     <MakeSelector />
                 </th>

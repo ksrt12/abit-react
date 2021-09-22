@@ -30,7 +30,7 @@ function OlympTd({ td }) {
 function OlympRow({ tds, unic }) {
     return (
         <tr style={{ backgroundColor: colorBVI(null, tds[6]) }}>
-            {tds.map((td, i) => (<OlympTd key={`${unic}:${i}`} td={td} />))}
+            {tds.map((td, i) => <OlympTd key={`${unic}:${i}`} td={td} />)}
         </tr>
     );
 }

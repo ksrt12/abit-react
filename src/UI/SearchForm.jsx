@@ -13,15 +13,7 @@ function EgeSubj(props) {
 
 function EgeForm() {
     const names = Object.keys(SUBJECTS);
-    const Forma = ({ arr }) => (
-        <form>{arr.map(name => (
-            <EgeSubj
-                key={name}
-                id={SUBJECTS[name]}
-                name={name}
-            />
-        ))}</form>
-    );
+    const Forma = props => <form>{props.arr.map(name => <EgeSubj key={name} id={SUBJECTS[name]} name={name} />)}</form>;
 
     return (
         <div className="ege" onChange={() => checkData(false)} >

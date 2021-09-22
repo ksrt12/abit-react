@@ -9,7 +9,6 @@ function App() {
         <div>
             <Links />
             <div className="main">
-                <br />
                 {fromWLS ? null : (<SearchForm />)}
                 <div id="results"></div>
             </div>

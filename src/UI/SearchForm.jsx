@@ -65,11 +65,7 @@ function SearchForm() {
                 </ div>
                 <EgeForm />
             </div>
-            <div>
-                <br />
-                <button disabled={disabled} onClick={doSearch}>Проверить</button>
-                <br /><br />
-            </div>
+            <button disabled={disabled} onClick={doSearch}>Проверить</button>
         </div>
     );
 }

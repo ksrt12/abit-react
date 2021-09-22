@@ -44,6 +44,7 @@ body {
 }
 
 .search {
+    margin: 10px 0;
     display: flex;
 }
 
@@ -52,6 +53,10 @@ body {
     border: 1px solid #9e9e9e;
     border-radius: 1em;
     margin: auto;
+}
+
+.search button {
+    margin: 5px 0;
 }
 
 .search form {
@@ -93,6 +98,7 @@ a {
 }
 
 .main table {
+    margin: 10px 0;
     table-layout: auto;
     width: 100%;
 }

@@ -2,6 +2,10 @@ import React from "react";
 import MakeSelector from "./MakeSelector";
 import { getSort } from "../js/utils";
 
+function MakeTh({ th }) {
+    return (<th onClick={getSort}>{th}</th>);
+}
+
 function TableHead() {
     const heads = [
         'Олимпиада',
@@ -14,7 +18,7 @@ function TableHead() {
     return (
         <thead>
             <tr>
-                {heads.map(th => (<th key={th} onClick={getSort}>{th}</th>))}
+                {heads.map(th => (<MakeTh key={th} th={th} />))}
                 <th id="stream">
                     <MakeSelector />
                 </th>

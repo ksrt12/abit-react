@@ -13,24 +13,20 @@ function EgeSubj(props) {
 
 function EgeForm() {
     const names = Object.keys(SUBJECTS);
-    const form = arr => {
-        return arr.map(name => (
+    const Forma = ({ arr }) => (
+        <form>{arr.map(name => (
             <EgeSubj
-                key={SUBJECTS[name]}
+                key={name}
                 id={SUBJECTS[name]}
                 name={name}
             />
-        ));
-    };
+        ))}</form>
+    );
 
     return (
         <div className="ege" onChange={() => checkData(false)} >
-            <form>
-                {form(names.slice(0, 4))}
-            </form>
-            <form>
-                {form(names.slice(4))}
-            </form>
+            <Forma arr={names.slice(0, 4)} />
+            <Forma arr={names.slice(4)} />
         </div>
     );
 };
@@ -43,6 +39,10 @@ function SearchForm() {
         { id: "FN", name: "Имя", placeholder: "Иван" },
         { id: "MN", name: "Отчество", placeholder: "Иванович" }
     ];
+
+    // const FioForm = () => (
+
+    // );
 
     const checkFio = form => Enable(!Boolean(form[0].value && form[1].value));
 
@@ -62,7 +62,7 @@ function SearchForm() {
                             <input type="date" id="BD" max="2005-01-01" min="1996-01-01" defaultValue="2002-01-01" />
                         </p>
                     </form>
-                </ div>
+                </div>
                 <EgeForm />
             </div>
             <button disabled={disabled} onClick={doSearch}>Проверить</button>

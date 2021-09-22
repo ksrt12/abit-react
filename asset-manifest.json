@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/abit-react/static/css/main.53add99d.chunk.css",
-    "main.js": "/abit-react/static/js/main.70ba4ed9.chunk.js",
-    "main.js.map": "/abit-react/static/js/main.70ba4ed9.chunk.js.map",
+    "main.css": "/abit-react/static/css/main.20c82ce0.chunk.css",
+    "main.js": "/abit-react/static/js/main.0360aaa7.chunk.js",
+    "main.js.map": "/abit-react/static/js/main.0360aaa7.chunk.js.map",
     "runtime-main.js": "/abit-react/static/js/runtime-main.2872874f.js",
     "runtime-main.js.map": "/abit-react/static/js/runtime-main.2872874f.js.map",
     "static/js/2.7bcf102b.chunk.js": "/abit-react/static/js/2.7bcf102b.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.15bad8a1.chunk.js": "/abit-react/static/js/3.15bad8a1.chunk.js",
     "static/js/3.15bad8a1.chunk.js.map": "/abit-react/static/js/3.15bad8a1.chunk.js.map",
     "index.html": "/abit-react/index.html",
-    "static/css/main.53add99d.chunk.css.map": "/abit-react/static/css/main.53add99d.chunk.css.map",
+    "static/css/main.20c82ce0.chunk.css.map": "/abit-react/static/css/main.20c82ce0.chunk.css.map",
     "static/js/2.7bcf102b.chunk.js.LICENSE.txt": "/abit-react/static/js/2.7bcf102b.chunk.js.LICENSE.txt",
     "static/media/2018.pdf": "/abit-react/static/media/2018.fdaf10c8.pdf",
     "static/media/2019.pdf": "/abit-react/static/media/2019.5fdb8996.pdf",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.2872874f.js",
     "static/js/2.7bcf102b.chunk.js",
-    "static/css/main.53add99d.chunk.css",
-    "static/js/main.70ba4ed9.chunk.js"
+    "static/css/main.20c82ce0.chunk.css",
+    "static/js/main.0360aaa7.chunk.js"
   ]
 }

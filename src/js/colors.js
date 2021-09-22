@@ -1,8 +1,9 @@
 import { bvi, sto } from "./constants";
 import { yesconf } from "./diploma";
 
-function setPinkColor(id, is_empty) {
-    setBgColor(document.querySelector(`[for=${id}]`), (is_empty) ? "pink" : "");
+function setPinkColor(id, is_empty, no_conf) {
+    setBgColor(document.querySelector(`[for=${id}]`), (is_empty) ? "pink" : (no_conf) ? "" : "#ffda60");
+    document.querySelector(`#${id}`).style.borderColor = (is_empty) ? "red" : (no_conf) ? "" : "gold";
 }
 
 function setBgColor(elem, color) {

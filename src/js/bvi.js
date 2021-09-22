@@ -1,5 +1,5 @@
 import { bvi, sto, ia, itin, wtf, conf_points, olympSubjBy } from "./constants";
-import { SUBJECTS, WLS } from "./constants";
+import { SUBJECTS, fromWLS } from "./constants";
 import { setPinkColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
@@ -474,18 +474,19 @@ function checkBVI(stream, grad_in, subj_in, name_in, lvl_in, dip_in) {
 }
 
 function checkConfNum(stream, curr_subj, curr_profile) {
-    let conf = true;
+    let proof = true;
+    let conf = EGE[curr_subj] >= conf_points;
     const rename = str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
 
     if (curr_profile) {
-        conf = olympSubjBy[curr_profile][curr_subj].includes(stream);
+        proof = olympSubjBy[curr_profile][curr_subj].includes(stream);
     }
-    if (WLS === "") {
-        setPinkColor(SUBJECTS[rename(curr_subj)], conf && EGE[curr_subj] === 0);
+    if (!fromWLS) {
+        setPinkColor(SUBJECTS[rename(curr_subj)], proof && EGE[curr_subj] === 0, conf);
     }
-    return (EGE[curr_subj] >= conf_points) && conf;
+    return proof && conf;
 }
 
 function checkConf(stream, olymp_profile) {

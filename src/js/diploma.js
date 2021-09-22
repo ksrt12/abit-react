@@ -146,7 +146,7 @@ function checkData(reset) {
             trs = [];
             for (let j of getEGEfromInput()) {
                 j.value = "";
-                setPinkColor(j.id, false);
+                setPinkColor(j.id, false, true);
             }
         } else {
             doSearch();

@@ -1,4 +1,4 @@
-export const subjects: { [key: string]: string } = {
+export const subjects: { [key: string]: string; } = {
     'm': 'математика',
     'r': 'русский язык',
     'i': 'информатика',
@@ -20,7 +20,7 @@ export const subjects: { [key: string]: string } = {
     social = ['27.03.05', '38.03.05'],
     informatics = ['09.03.01', '09.03.04', '10.03.01', '11.03.03', '12.03.01',
         '13.03.02', '15.03.04', '15.03.06', '23.03.03', '24.03.02', '27.03.04'],
-    olympSubjBy: { [key: string]: any } = {
+    olympSubjBy: { [key: string]: any; } = {
         'автоматизация бизнес-процессов': {
             'информатика': ['44.03.04'],
             'обществознание': social

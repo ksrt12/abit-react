@@ -22,7 +22,7 @@ let trs: any[] = [];
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
 
-let params: { [index: string]: string }, EGE: { [index: string]: number } = {};
+let params: { [index: string]: string; }, EGE: { [index: string]: number; } = {};
 
 declare global {
     interface Window {
@@ -31,17 +31,16 @@ declare global {
 }
 
 function getParamsFrom(pars: string, spl1: string, spl2: string, num = false) {
+    let obj: { [index: string]: any; } = {};
     return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
         const [key, val]: string[] = e.split(spl2);
         if (num) {
-            // @ts-ignore
             p[key.toLowerCase()] = Number(val);
         } else {
-            // @ts-ignore
             p[key] = val;
         }
         return p;
-    }, {});
+    }, obj);
 }
 
 function loadParams() {
@@ -96,8 +95,7 @@ function searchOlymps() {
 
 function updateStatus(stream: string) {
     const textFrom = (row: HTMLTableRowElement, cell: number) => row.cells[cell].innerText;
-    // @ts-ignore
-    for (let i of document.querySelector("tbody").rows) {
+    for (let i of (document.querySelector("tbody") as HTMLTableSectionElement).rows) {
         let new_status = checkBVI(stream,
             textFrom(i, 5),
             textFrom(i, 3),
@@ -117,14 +115,10 @@ function updatePoints(points: number, id: string) {
 
 function doSearch() {
     if (isTable()) {
-        // @ts-ignore
-        updateStatus(document.querySelector("#stream > select").value);
+        updateStatus((document.querySelector("#stream > select") as HTMLInputElement).value);
     } else {
         params = {};
-        const searchInputs: any = document.querySelectorAll("#fio_form > p > input")
-        console.dir(searchInputs)
-        for (let i of searchInputs) {
-            // @ts-ignore
+        for (const i of (document.querySelectorAll("#fio_form > p > input") as any)) {
             params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
         }
         Person.makeName();
@@ -135,14 +129,12 @@ function doSearch() {
 }
 
 function checkData(reset: boolean) {
-    //console.log(EGE);
     if (isTable()) {
         if (reset) {
             RemoveTable();
             document.title = "Олимпиады РСОШ";
             trs = [];
-            for (let j of document.querySelectorAll(".ege > form > p > input")) {
-                // @ts-ignore
+            for (const j of (document.querySelectorAll(".ege > form > p > input") as any)) {
                 j.value = "";
                 setPinkColor(j.id, false, true);
             }

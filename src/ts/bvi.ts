@@ -485,7 +485,7 @@ function checkConfNum(stream: string, curr_subj: string, curr_profile?: string) 
         proof = olympSubjBy[curr_profile][curr_subj].includes(stream);
     }
     if (!fromWLS) {
-        setPinkColor(getIdBySubj(curr_subj), EGE[curr_subj] === 0, conf);
+        setPinkColor(getIdBySubj(curr_subj), Boolean(EGE[curr_subj]) === false, conf);
     }
     return Number(proof && conf);
 }

@@ -95,15 +95,15 @@ function searchOlymps() {
 
 function updateStatus(stream: string) {
     const textFrom = (row: HTMLTableRowElement, cell: number) => row.cells[cell].innerText;
-    for (let i of (document.querySelector("tbody") as HTMLTableSectionElement).rows) {
-        let new_status = checkBVI(stream,
+    for (const i of (document.querySelector("tbody") as HTMLTableSectionElement).rows) {
+        const newStatus = checkBVI(stream,
             textFrom(i, 5),
             textFrom(i, 3),
             textFrom(i, 0),
             textFrom(i, 1),
             textFrom(i, 2));
-        i.cells[6].innerHTML = new_status;
-        colorBVI(i, new_status);
+        i.cells[6].innerHTML = newStatus;
+        colorBVI(i, newStatus);
     }
 }
 
@@ -115,7 +115,7 @@ function updatePoints(points: number, id: string) {
 
 function doSearch() {
     if (isTable()) {
-        updateStatus((document.querySelector("#stream > select") as HTMLInputElement).value);
+        updateStatus((document.querySelector("#stream > select") as HTMLSelectElement).value);
     } else {
         params = {};
         for (const i of (document.querySelectorAll("#fio_form > p > input") as any)) {
@@ -144,10 +144,6 @@ function checkData(reset: boolean) {
     }
 }
 
-function checkTableIsLoad() {
-    window.addEventListener("load", checkTable);
-}
-
 function checkTable() {
     if (trs.length) {
         InsertTable(Person.getDName(), trs);
@@ -164,7 +160,7 @@ function checkTable() {
 function loadFromWLS() {
     loadParams();
     searchOlymps();
-    checkTableIsLoad();
+    window.addEventListener("load", checkTable);
 }
 
 if (fromWLS) {

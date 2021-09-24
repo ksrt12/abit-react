@@ -17,7 +17,7 @@ function checkBVI(stream: string, grad_in: string, subj_in: string, name_in: str
     const lvldip1 = (local_lvl: number) => (lvl === local_lvl && dip === 1) ? bvi : sto;
 
     if (subj === 'русский язык') {
-        return (checkConfNum(stream, subj)) ? sto : wtf;
+        return (ch75 === yesconf) ? sto : wtf;
     }
     if (ch75 === wtf) {
         // break now if olymp profile is false
@@ -479,7 +479,7 @@ function getIdBySubj(subj: string) {
 
 function checkConfNum(stream: string, curr_subj: string, curr_profile?: string) {
     let proof = true;
-    let conf = EGE[curr_subj] >= conf_points;
+    const conf = EGE[curr_subj] >= conf_points;
 
     if (curr_profile) {
         proof = olympSubjBy[curr_profile][curr_subj].includes(stream);
@@ -499,7 +499,7 @@ function checkConf(stream: string, olymp_profile: string) {
         case 'boolean':
             return wtf;
         case 'object':
-            for (let i of Object.keys(conf_subj)) {
+            for (const i of Object.keys(conf_subj)) {
                 stat += checkConfNum(stream, i, olymp_profile);
             }
             break;

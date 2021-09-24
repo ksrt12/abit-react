@@ -2,7 +2,7 @@ import React from "react";
 import Links from "./UI/Links";
 import SearchForm from "./UI/SearchForm";
 import Copyright from "./UI/Copyright";
-import { fromWLS } from "./js/constants";
+import { fromWLS } from "./ts/constants";
 
 function App() {
     return (

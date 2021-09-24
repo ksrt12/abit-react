@@ -10,33 +10,34 @@ import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable } from "../UI/FullTable";
 import Olymps from "../UI/Olymps";
 
-import { WLS, fromWLS, RSROLYMP, SUBJECTS } from "./constants";
+import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
 
 import { checkBVI } from "./bvi";
 import { colorBVI, setPinkColor } from "./colors";
 
-import { isTable, getEGEfromInput } from "./utils";
+import { isTable } from "./utils";
 
-let trs = [];
+let trs: any[] = [];
 
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
 
-let params = {
-    FN: null,
-    LN: null,
-    MN: null,
-    DN: null,
-    BD: null,
-    EGE: null
-}, EGE;
+let params: { [index: string]: string }, EGE: { [index: string]: number } = {};
 
-function getParamsFrom(pars, spl1, spl2, num = false) {
+declare global {
+    interface Window {
+        diplomaCodes: any;
+    }
+}
+
+function getParamsFrom(pars: string, spl1: string, spl2: string, num = false) {
     return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
-        const [key, val] = e.split(spl2);
+        const [key, val]: string[] = e.split(spl2);
         if (num) {
+            // @ts-ignore
             p[key.toLowerCase()] = Number(val);
         } else {
+            // @ts-ignore
             p[key] = val;
         }
         return p;
@@ -49,8 +50,7 @@ function loadParams() {
         EGE = getParamsFrom(params.EGE, ',', ':', true);
     } else {
         // set default EGE points as 100
-        EGE = {};
-        Object.keys(SUBJECTS).forEach(subj => EGE[subj.toLowerCase()] = 100);
+        Object.values(subjects).forEach(subj => EGE[subj] = 100);
         yesconf = '';
         nonconf = '';
     }
@@ -75,13 +75,12 @@ const Person = {
     }
 };
 
-function loadDiplomaList(year, pid) {
+function loadDiplomaList(year: number, pid: string) {
     let s = document.createElement('script');
     s.onload = () => {
         trs = [...trs, ...Olymps(year, window.diplomaCodes)];
     };
     s.async = false;
-    s.crossorigin = "anonymous";
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
     document.head.appendChild(s);
 }
@@ -95,8 +94,9 @@ function searchOlymps() {
     }
 }
 
-function updateStatus(stream) {
-    const textFrom = (row, cell) => row.cells[cell].innerText;
+function updateStatus(stream: string) {
+    const textFrom = (row: HTMLTableRowElement, cell: number) => row.cells[cell].innerText;
+    // @ts-ignore
     for (let i of document.querySelector("tbody").rows) {
         let new_status = checkBVI(stream,
             textFrom(i, 5),
@@ -109,42 +109,40 @@ function updateStatus(stream) {
     }
 }
 
+function updatePoints(points: number, id: string) {
+    const validPoints = (points < 0) ? 0 : (points > 100) ? 100 : points;
+    EGE[subjects[id]] = validPoints;
+    return validPoints;
+}
+
 function doSearch() {
-    EGE = {};
-    for (let j of getEGEfromInput()) {
-        let points = Number(j.value);
-        if (j.value !== "") {
-            points = (points < 0) ? 0 : (points > 100) ? 100 : points;
-            j.value = points;
-        }
-        EGE[document.querySelector(`[for=${j.id}]`).innerText.toLowerCase()] = points;
-    }
     if (isTable()) {
+        // @ts-ignore
         updateStatus(document.querySelector("#stream > select").value);
     } else {
         params = {};
-        for (let i of document.querySelectorAll("#fio_form > p > input")) {
-            params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, s => s.toUpperCase());
+        const searchInputs: any = document.querySelectorAll("#fio_form > p > input")
+        console.dir(searchInputs)
+        for (let i of searchInputs) {
+            // @ts-ignore
+            params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
         }
         Person.makeName();
-
-        if (params.NAME) {
-            Promise.resolve()
-                .then(searchOlymps)
-                .then(() => setTimeout(checkTable, 400));
-        } else {
-            console.log("empty");
-        }
+        Promise.resolve()
+            .then(searchOlymps)
+            .then(() => setTimeout(checkTable, 400));
     }
 }
 
-function checkData(reset) {
+function checkData(reset: boolean) {
+    //console.log(EGE);
     if (isTable()) {
         if (reset) {
             RemoveTable();
             document.title = "Олимпиады РСОШ";
             trs = [];
-            for (let j of getEGEfromInput()) {
+            for (let j of document.querySelectorAll(".ege > form > p > input")) {
+                // @ts-ignore
                 j.value = "";
                 setPinkColor(j.id, false, true);
             }
@@ -155,16 +153,7 @@ function checkData(reset) {
 }
 
 function checkTableIsLoad() {
-    window.addEventListener("load", () => {
-        if (params.wallpapers === "true") {
-            document.querySelector("body > div.left").style.display = "none";
-            document.querySelector("body > div.main").style.display = "none";
-            document.querySelector("body > div.right").style.display = "none";
-            // addScript("js/stars.js");
-            //start_stars();
-        }
-        checkTable();
-    });
+    window.addEventListener("load", checkTable);
 }
 
 function checkTable() {
@@ -190,5 +179,5 @@ if (fromWLS) {
     window.addEventListener("DOMContentLoaded", loadFromWLS);
 }
 
-export { doSearch, checkData, updateStatus };
+export { doSearch, checkData, updatePoints, updateStatus };
 export { EGE, yesconf, nonconf };

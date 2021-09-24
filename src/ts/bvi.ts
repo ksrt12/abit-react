@@ -1,10 +1,10 @@
-import { bvi, sto, ia, itin, wtf, conf_points, olympSubjBy } from "./constants";
-import { SUBJECTS, fromWLS } from "./constants";
+import { bvi, sto, ia, itin, wtf, conf_points } from "./constants";
+import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
 import { setPinkColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
-function checkBVI(stream, grad_in, subj_in, name_in, lvl_in, dip_in) {
-    let status;
+function checkBVI(stream: string, grad_in: string, subj_in: string, name_in: string, lvl_in: string | number, dip_in: string | number) {
+    let status: string;
     const
         grad = Number(grad_in),
         lvl = Number(lvl_in),
@@ -13,8 +13,8 @@ function checkBVI(stream, grad_in, subj_in, name_in, lvl_in, dip_in) {
         name = name_in;
 
     const ch75 = checkConf(stream, subj);
-    const bviORia = local_lvl => (lvl === local_lvl) ? bvi : ia;
-    const lvldip1 = local_lvl => (lvl === local_lvl && dip === 1) ? bvi : sto;
+    const bviORia = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;
+    const lvldip1 = (local_lvl: number) => (lvl === local_lvl && dip === 1) ? bvi : sto;
 
     if (subj === 'русский язык') {
         return (checkConfNum(stream, subj)) ? sto : wtf;
@@ -473,23 +473,24 @@ function checkBVI(stream, grad_in, subj_in, name_in, lvl_in, dip_in) {
     return status;
 }
 
-function checkConfNum(stream, curr_subj, curr_profile) {
+function getIdBySubj(subj: string) {
+    return ids.filter(id => subjects[id] === subj).toString();
+}
+
+function checkConfNum(stream: string, curr_subj: string, curr_profile?: string) {
     let proof = true;
     let conf = EGE[curr_subj] >= conf_points;
-    const rename = str => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    };
 
     if (curr_profile) {
         proof = olympSubjBy[curr_profile][curr_subj].includes(stream);
     }
     if (!fromWLS) {
-        setPinkColor(SUBJECTS[rename(curr_subj)], proof && EGE[curr_subj] === 0, conf);
+        setPinkColor(getIdBySubj(curr_subj), EGE[curr_subj] === 0, conf);
     }
-    return proof && conf;
+    return Number(proof && conf);
 }
 
-function checkConf(stream, olymp_profile) {
+function checkConf(stream: string, olymp_profile: string) {
     let stat = 0;
     const conf_subj = olympSubjBy[olymp_profile];
     switch (typeof conf_subj) {

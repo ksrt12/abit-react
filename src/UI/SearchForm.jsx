@@ -1,60 +1,93 @@
 import React, { useState } from "react";
-import { checkData, doSearch } from "../js/diploma";
-import { SUBJECTS } from "../js/constants";
+import { checkData, doSearch, updatePoints } from "../ts/diploma";
+import { ids, subjects } from "../ts/constants";
 
-function EgeSubj(props) {
+function DefaultInput({ id, label, ...inputProps }) {
+    const [val, setVal] = useState("");
+    const validate = e => {
+        e.preventDefault();
+
+        const target = e.target;
+        let newVal = target.value;
+
+        if (target.type === "number") {
+            newVal = updatePoints(Number(newVal), target.id) || "";
+        }
+
+        setVal(newVal);
+    };
+
     return (
         <p>
-            <label htmlFor={props.id}>{props.name}</label>
-            <input type="number" min="0" max="100" placeholder="60" id={props.id} />
+            <label htmlFor={id}>{label}</label>
+            <input id={id} {...inputProps} value={val} onChange={validate} />
         </p>
     );
 }
 
 function EgeForm() {
-    const names = Object.keys(SUBJECTS);
-    const Forma = props => <form>{props.arr.map(name => <EgeSubj key={name} id={SUBJECTS[name]} name={name} />)}</form>;
+    const getSubj = id => {
+        const subj = subjects[id];
+        return subj[0].toUpperCase() + subj.slice(1);
+    };
+    const Forma = arr => <form>
+        {arr.map(id => <DefaultInput
+            key={id}
+            id={id}
+            label={getSubj(id)}
+            type="number"
+            min="0" max="100"
+            placeholder="60"
+        />)}
+    </form>;
 
     return (
         <div className="ege" onChange={() => checkData(false)} >
-            <Forma arr={names.slice(0, 4)} />
-            <Forma arr={names.slice(4)} />
+            {Forma(ids.slice(0, 4))}
+            {Forma(ids.slice(4))}
         </div>
     );
 };
 
-function SearchForm() {
-    const [disabled, Enable] = useState(true);
-
+function FioForm({ checkFio }) {
     const fio = [
         { id: "LN", name: "Фамилия", placeholder: "Иванов" },
         { id: "FN", name: "Имя", placeholder: "Иван" },
         { id: "MN", name: "Отчество", placeholder: "Иванович" }
     ];
 
-    // const FioForm = () => (
+    return (
+        <div className="fio" onChange={() => checkData(true)} >
+            <form id="fio_form" autoComplete="on" onChange={e => checkFio(e.target.form)}>
+                {fio.map(obj => <DefaultInput
+                    key={obj.id}
+                    id={obj.id}
+                    label={obj.name}
+                    type="text"
+                    placeholder={obj.placeholder}
+                    maxLength="20"
+                />)}
+                <DefaultInput
+                    key="BD"
+                    id="BD"
+                    label="Дата рождения"
+                    type="date"
+                    max="2005-01-01"
+                    min="1996-01-01"
+                />
+            </form>
+        </div>
+    );
+}
 
-    // );
-
+function SearchForm() {
+    const [disabled, Enable] = useState(true);
     const checkFio = form => Enable(!Boolean(form[0].value && form[1].value));
 
     return (
         <div>
             <div className="search">
-                <div className="fio" onChange={() => checkData(true)} >
-                    <form id="fio_form" autoComplete="on" onKeyUp={e => checkFio(e.target.form)}>
-                        {fio.map(obj => (
-                            <p key={obj.id}>
-                                <label htmlFor={obj.id}>{obj.name}</label>
-                                <input type="text" id={obj.id} placeholder={obj.placeholder} />
-                            </p>
-                        ))}
-                        <p>
-                            <label htmlFor="BD">Дата рождения</label>
-                            <input type="date" id="BD" max="2005-01-01" min="1996-01-01" defaultValue="2002-01-01" />
-                        </p>
-                    </form>
-                </div>
+                <FioForm checkFio={checkFio} />
                 <EgeForm />
             </div>
             <button disabled={disabled} onClick={doSearch}>Проверить</button>

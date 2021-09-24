@@ -1,10 +1,10 @@
-function getSort(event) {
+function getSort(event: { target: any; }) {
     const target = event.target;
     if (1) {
         const order = (target.dataset.order = -(target.dataset.order || -1));
         const index = [...target.parentNode.cells].indexOf(target);
         const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
-        const comparator = (index, order) => (a, b) => order * collator.compare(
+        const comparator = (index: number, order: number) => (a: { children: { [x: string]: { innerHTML: string; }; }; }, b: { children: { [x: string]: { innerHTML: string; }; }; }) => order * collator.compare(
             a.children[index].innerHTML,
             b.children[index].innerHTML
         );
@@ -15,12 +15,8 @@ function getSort(event) {
     }
 }
 
-function getEGEfromInput() {
-    return document.querySelectorAll(".ege > form > p > input");
-}
-
 function isTable() {
     return document.querySelector("table");
 }
 
-export { getSort, getEGEfromInput, isTable };
+export { getSort, isTable };

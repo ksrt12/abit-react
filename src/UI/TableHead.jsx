@@ -1,6 +1,6 @@
 import React from "react";
 import MakeSelector from "./MakeSelector";
-import { getSort } from "../js/utils";
+import { getSort } from "../ts/utils";
 
 function MakeTh({ th }) {
     return (<th onClick={getSort}>{th}</th>);

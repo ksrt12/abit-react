@@ -1,6 +1,6 @@
 import React from "react";
-import { informatics, physics, chemistry, social } from "../js/constants";
-import { updateStatus } from "../js/diploma";
+import { informatics, physics, chemistry, social } from "../ts/constants";
+import { updateStatus } from "../ts/diploma";
 
 function MakeSelector() {
     const streams = [

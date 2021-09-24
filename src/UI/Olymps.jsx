@@ -1,4 +1,3 @@
-import React from "react";
 import { RSROLYMP } from "../ts/constants";
 import { colorBVI } from "../ts/colors";
 import { checkBVI } from "../ts/bvi";

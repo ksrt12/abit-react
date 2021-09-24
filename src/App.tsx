@@ -1,4 +1,3 @@
-import React from "react";
 import Links from "./UI/Links";
 import SearchForm from "./UI/SearchForm";
 import Copyright from "./UI/Copyright";

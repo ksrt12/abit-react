@@ -1,4 +1,3 @@
-import React from "react";
 import { informatics, physics, chemistry, social } from "../ts/constants";
 import { updateStatus } from "../ts/diploma";
 

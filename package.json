@@ -7,10 +7,15 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.9.6",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
     "js-sha256": "^0.9.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
+    "typescript": "^4.4.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -41,8 +46,9 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^8.5.0",
-    "gh-pages": "^3.2.3",
-    "typescript": "^4.4.3"
+    "gh-pages": "^3.2.3"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "typescript": "^4.4.3"
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { checkData, doSearch, updatePoints } from "../ts/diploma";
 import { ids, subjects } from "../ts/constants";
 

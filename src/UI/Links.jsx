@@ -1,4 +1,3 @@
-import React from "react";
 import PDFs from "../files/PDFs";
 
 function Link(href, text, key = href) {

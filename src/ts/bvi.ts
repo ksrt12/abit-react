@@ -4,7 +4,6 @@ import { setPinkColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
 function checkBVI(stream: string, { ...olymp }) {
-    console.log(olymp);
     let status: string;
     const
         grad = Number(olymp.grad),

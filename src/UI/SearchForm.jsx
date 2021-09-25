@@ -1,9 +1,20 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { checkData, doSearch, updatePoints } from "../ts/diploma";
 import { ids, subjects } from "../ts/constants";
+import test from "../test";
 
-function DefaultInput({ id, label, ...inputProps }) {
-    const [val, setVal] = useState("");
+let fortest = false;
+let defs;
+
+// fortest = true;
+if (fortest) {
+    defs = test;
+} else {
+    defs = { dis: true };
+}
+
+function DefaultInput({ id, label, def, ...inputProps }) {
+    const [val, setVal] = useState(def || "");
     const validate = e => {
         e.preventDefault();
 
@@ -25,7 +36,8 @@ function DefaultInput({ id, label, ...inputProps }) {
     );
 }
 
-function EgeForm() {
+const EgeForm = React.memo(function EgeForm() {
+    console.log("render egeform");
     const getSubj = id => {
         const subj = subjects[id];
         return subj[0].toUpperCase() + subj.slice(1);
@@ -47,52 +59,71 @@ function EgeForm() {
             {Forma(ids.slice(4))}
         </div>
     );
-};
+});
 
 function FioForm({ checkFio }) {
+    console.log("render fioform");
     const fio = [
-        { id: "LN", name: "Фамилия", placeholder: "Иванов" },
-        { id: "FN", name: "Имя", placeholder: "Иван" },
-        { id: "MN", name: "Отчество", placeholder: "Иванович" }
+        {
+            id: "LN", type: "text",
+            label: "Фамилия",
+            maxLength: 20,
+            placeholder: "Иванов",
+            def: defs.LN
+        },
+        {
+            id: "FN", type: "text",
+            label: "Имя",
+            maxLength: 20,
+            placeholder: "Иван",
+            def: defs.FN
+        },
+        {
+            id: "MN", type: "text",
+            label: "Отчество",
+            maxLength: 20,
+            placeholder: "Иванович",
+            def: defs.MN
+        },
+        {
+            id: "BD", type: "date",
+            label: "Дата рождения",
+            max: "2005-01-01",
+            min: "1996-01-01",
+            def: defs.BD || "2003-01-01"
+        }
     ];
 
     return (
         <div className="fio" onChange={() => checkData(true)} >
             <form id="fio_form" autoComplete="on" onChange={e => checkFio(e.target.form)}>
-                {fio.map(obj => <DefaultInput
-                    key={obj.id}
-                    id={obj.id}
-                    label={obj.name}
-                    type="text"
-                    placeholder={obj.placeholder}
-                    maxLength="20"
-                />)}
-                <DefaultInput
-                    key="BD"
-                    id="BD"
-                    label="Дата рождения"
-                    type="date"
-                    max="2005-01-01"
-                    min="1996-01-01"
-                />
+                {fio.map(obj => <DefaultInput key={obj.id} {...obj} />)}
             </form>
         </div>
+    );
+};
+
+function SearchBtn({ isDisabled, setDisable }) {
+    const [btnName, setBtnName] = useState("Проверить");
+    return (
+        <button disabled={isDisabled} onClick={() => doSearch(setBtnName, setDisable)}>{btnName}</button>
     );
 }
 
 function SearchForm() {
-    const [disabled, Enable] = useState(true);
-    const checkFio = form => Enable(!Boolean(form[0].value && form[1].value));
+    const [isDisabled, setDisable] = useState(defs.dis);
+    const props = { isDisabled, setDisable };
+    const checkFio = form => setDisable(!Boolean(form[0].value && form[1].value));
 
     return (
-        <div>
+        <div className="search_full">
             <div className="search">
                 <FioForm checkFio={checkFio} />
                 <EgeForm />
             </div>
-            <button disabled={disabled} onClick={doSearch}>Проверить</button>
+            <SearchBtn {...props} />
         </div>
     );
 }
 
-export default SearchForm;;
+export default SearchForm;

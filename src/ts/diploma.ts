@@ -77,7 +77,7 @@ function loadDiplomaList(year: number, pid: string) {
     s.onload = () => {
         trs = [...trs, ...Olymps(year, window.diplomaCodes)];
     };
-    //s.async = false;
+    s.async = false;
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
     document.head.appendChild(s);
 }
@@ -112,19 +112,20 @@ function updatePoints(points: number, id: string) {
     return validPoints;
 }
 
-function doSearch() {
-    if (trs.length) {
-        updateStatus((document.querySelector("#stream > select") as HTMLSelectElement).value);
-    } else {
-        params = {};
-        for (const i of (document.querySelectorAll("#fio_form > p > input") as any)) {
-            params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
-        }
-        Person.makeName();
-        Promise.resolve()
-            .then(searchOlymps)
-            .then(() => setTimeout(checkTable, 1000));
+function doSearch(rename: any, disable: any) {
+    params = {};
+    for (const i of (document.querySelectorAll("#fio_form > p > input") as any)) {
+        params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
     }
+    Person.makeName();
+    rename("Загрузка...");
+    Promise.resolve()
+        .then(searchOlymps)
+        .then(() => setTimeout(() => {
+            checkTable();
+            rename("Проверить");
+            disable(true);
+        }, 1000));
 }
 
 function checkData(reset: boolean) {
@@ -138,7 +139,7 @@ function checkData(reset: boolean) {
                 setPinkColor(j.id, false, true);
             }
         } else {
-            doSearch();
+            updateStatus((document.querySelector("#stream > select") as HTMLSelectElement).value);
         }
     }
 }

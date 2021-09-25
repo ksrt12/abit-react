@@ -57,8 +57,8 @@ body {
     margin: auto;
 }
 
-.search button {
-    margin: 5px 0;
+button {
+    margin-bottom: 3px;
 }
 
 .search p {
@@ -243,8 +243,14 @@ th.sorted[data-order="1"] {
 
 @media (max-width: 930px),
 (orientation: portrait) {
+    .main {
+        width: fit-content;
+    }
+    .search_full {
+        width: calc(100vw - 40px);
+    }
     .main table {
-        overflow: scroll;
+        overflow-y: scroll;
     }
     .search {
         flex-direction: column;

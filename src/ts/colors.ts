@@ -1,9 +1,9 @@
 import { bvi, sto } from "./constants";
 import { yesconf } from "./diploma";
 
-function setPinkColor(id: string, is_empty: boolean, no_conf: boolean) {
-    setBgColor((document.querySelector(`[for=${id}]`) as HTMLTableRowElement), (is_empty) ? "pink" : (no_conf) ? "" : "#ffda60");
-    setBorderColor((document.querySelector(`#${id}`) as HTMLInputElement), (is_empty) ? "red" : (no_conf) ? "" : "gold");
+function setPinkColor(id: string, isEmpty: boolean, noConf: boolean) {
+    setBgColor((document.querySelector(`[for=${id}]`) as HTMLTableRowElement), (isEmpty) ? "pink" : (noConf) ? "" : "#ffda60");
+    setBorderColor((document.querySelector(`#${id}`) as HTMLInputElement), (isEmpty) ? "red" : (noConf) ? "" : "gold");
 }
 
 function setBgColor(elem: HTMLTableRowElement, color: string) {

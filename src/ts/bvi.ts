@@ -1,4 +1,4 @@
-import { bvi, sto, ia, itin, wtf, conf_points } from "./constants";
+import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
 import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
 import { setPinkColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
@@ -477,34 +477,34 @@ function getIdBySubj(subj: string) {
     return ids.filter(id => subjects[id] === subj).toString();
 }
 
-function checkConfNum(stream: string, curr_subj: string, curr_profile?: string) {
+function checkConfNum(stream: string, currSubj: string, currProfile?: string) {
     let proof = true;
-    const conf = EGE[curr_subj] >= conf_points;
+    const conf = EGE[currSubj] >= confPoints;
 
-    if (curr_profile) {
-        proof = olympSubjBy[curr_profile][curr_subj].includes(stream);
+    if (currProfile) {
+        proof = olympSubjBy[currProfile][currSubj].includes(stream);
     }
     if (!fromWLS) {
-        setPinkColor(getIdBySubj(curr_subj), Boolean(EGE[curr_subj]) === false, conf);
+        setPinkColor(getIdBySubj(currSubj), Boolean(EGE[currSubj]) === false, conf);
     }
     return Number(proof && conf);
 }
 
-function checkConf(stream: string, olymp_profile: string) {
+function checkConf(stream: string, olympProfile: string) {
     let stat = 0;
-    const conf_subj = olympSubjBy[olymp_profile];
-    switch (typeof conf_subj) {
+    const confSubj = olympSubjBy[olympProfile];
+    switch (typeof confSubj) {
         case 'undefined':
             return itin;
         case 'boolean':
             return wtf;
         case 'object':
-            for (const i of Object.keys(conf_subj)) {
-                stat += checkConfNum(stream, i, olymp_profile);
+            for (const i of Object.keys(confSubj)) {
+                stat += checkConfNum(stream, i, olympProfile);
             }
             break;
         case 'string':
-            stat = checkConfNum(stream, conf_subj);
+            stat = checkConfNum(stream, confSubj);
             break;
         default:
             alert("Ну параша, девки!");

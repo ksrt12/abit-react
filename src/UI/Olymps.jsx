@@ -2,12 +2,12 @@ import { RSROLYMP } from "../ts/constants";
 import { colorBVI } from "../ts/colors";
 import { checkBVI } from "../ts/bvi";
 
-function getSubTitles(olympname, grad) {
+function getSubTitles(olympName, grad) {
     const tmp = {
-        name: olympname.substring(olympname.indexOf('. "') + 3, olympname.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
-        lvl: Number(olympname.substr(olympname.indexOf('уровень') - 2, 1).trim()),
-        dip: Number(olympname.substr(olympname.indexOf('Диплом') + 7, 1).trim()),
-        subj: olympname.substring(olympname.indexOf('("') + 2, olympname.indexOf('")')).toLowerCase().replace('cистемы', 'системы').trim(),
+        name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
+        lvl: Number(olympName.substr(olympName.indexOf('уровень') - 2, 1).trim()),
+        dip: Number(olympName.substr(olympName.indexOf('Диплом') + 7, 1).trim()),
+        subj: olympName.substring(olympName.indexOf('("') + 2, olympName.indexOf('")')).toLowerCase().replace('cистемы', 'системы').trim(),
         status: ""
     };
     tmp["status"] = checkBVI('01.03.02', grad, tmp.subj, tmp.name, tmp.lvl, tmp.dip);

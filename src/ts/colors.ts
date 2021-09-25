@@ -14,12 +14,11 @@ function setBorderColor(elem: HTMLInputElement, color: string) {
     elem.style.borderColor = color;
 }
 
-
-function colorBVI(tr: HTMLTableRowElement, new_status: string) {
+function colorBVI(newStatus: string, tr?: HTMLTableRowElement) {
     let bg: string;
-    if (new_status.includes(bvi + yesconf)) {
+    if (newStatus.includes(bvi + yesconf)) {
         bg = "#a0faad";
-    } else if (new_status.includes(sto + yesconf)) {
+    } else if (newStatus.includes(sto + yesconf)) {
         bg = "#89f5dc";
     } else {
         bg = "";

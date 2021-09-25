@@ -8,7 +8,7 @@ function App() {
         <div>
             <Links />
             <div className="main">
-                {fromWLS ? null : (<SearchForm />)}
+                {!fromWLS && (<SearchForm />)}
                 <div id="results"></div>
             </div>
             <Copyright />

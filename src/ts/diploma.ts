@@ -15,8 +15,6 @@ import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
 import { checkBVI } from "./bvi";
 import { colorBVI, setPinkColor } from "./colors";
 
-import { isTable } from "./utils";
-
 let trs: any[] = [];
 
 let nonconf = ' Не подтв.',
@@ -79,7 +77,7 @@ function loadDiplomaList(year: number, pid: string) {
     s.onload = () => {
         trs = [...trs, ...Olymps(year, window.diplomaCodes)];
     };
-    s.async = false;
+    //s.async = false;
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
     document.head.appendChild(s);
 }
@@ -96,14 +94,15 @@ function searchOlymps() {
 function updateStatus(stream: string) {
     const textFrom = (row: HTMLTableRowElement, cell: number) => row.cells[cell].innerText;
     for (const i of (document.querySelector("tbody") as HTMLTableSectionElement).rows) {
-        const newStatus = checkBVI(stream,
-            textFrom(i, 5),
-            textFrom(i, 3),
-            textFrom(i, 0),
-            textFrom(i, 1),
-            textFrom(i, 2));
+        const newStatus = checkBVI(stream, {
+            name: textFrom(i, 0),
+            lvl: textFrom(i, 1),
+            dip: textFrom(i, 2),
+            subj: textFrom(i, 3),
+            grad: textFrom(i, 5)
+        });
         i.cells[6].innerHTML = newStatus;
-        colorBVI(i, newStatus);
+        colorBVI(newStatus, i);
     }
 }
 
@@ -114,7 +113,7 @@ function updatePoints(points: number, id: string) {
 }
 
 function doSearch() {
-    if (isTable()) {
+    if (trs.length) {
         updateStatus((document.querySelector("#stream > select") as HTMLSelectElement).value);
     } else {
         params = {};
@@ -124,12 +123,12 @@ function doSearch() {
         Person.makeName();
         Promise.resolve()
             .then(searchOlymps)
-            .then(() => setTimeout(checkTable, 400));
+            .then(() => setTimeout(checkTable, 1000));
     }
 }
 
 function checkData(reset: boolean) {
-    if (isTable()) {
+    if (trs.length) {
         if (reset) {
             RemoveTable();
             document.title = "Олимпиады РСОШ";

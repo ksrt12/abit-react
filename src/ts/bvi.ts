@@ -3,14 +3,15 @@ import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
 import { setPinkColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
-function checkBVI(stream: string, grad_in: string, subj_in: string, name_in: string, lvl_in: string | number, dip_in: string | number) {
+function checkBVI(stream: string, { ...olymp }) {
+    console.log(olymp);
     let status: string;
     const
-        grad = Number(grad_in),
-        lvl = Number(lvl_in),
-        dip = Number(dip_in),
-        subj = subj_in,
-        name = name_in;
+        grad = Number(olymp.grad),
+        lvl = Number(olymp.lvl),
+        dip = Number(olymp.dip),
+        subj = olymp.subj,
+        name = olymp.name;
 
     const ch75 = checkConf(stream, subj);
     const bviORia = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;

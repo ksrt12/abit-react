@@ -6,7 +6,7 @@ import test from "../test";
 let fortest = false;
 let defs;
 
-// fortest = true;
+// fortest = true;;
 if (fortest) {
     defs = test;
 } else {
@@ -61,8 +61,9 @@ const EgeForm = React.memo(function EgeForm() {
     );
 });
 
-function FioForm({ checkFio }) {
+const FioForm = React.memo(function FioForm({ setDisable }) {
     console.log("render fioform");
+    const checkFio = form => setDisable(!Boolean(form[0].value && form[1].value));
     const fio = [
         {
             id: "LN", type: "text",
@@ -101,7 +102,7 @@ function FioForm({ checkFio }) {
             </form>
         </div>
     );
-};
+});
 
 function SearchBtn({ isDisabled, setDisable }) {
     const [btnName, setBtnName] = useState("Проверить");
@@ -113,12 +114,11 @@ function SearchBtn({ isDisabled, setDisable }) {
 function SearchForm() {
     const [isDisabled, setDisable] = useState(defs.dis);
     const props = { isDisabled, setDisable };
-    const checkFio = form => setDisable(!Boolean(form[0].value && form[1].value));
 
     return (
         <div className="search_full">
             <div className="search">
-                <FioForm checkFio={checkFio} />
+                <FioForm setDisable={setDisable} />
                 <EgeForm />
             </div>
             <SearchBtn {...props} />

@@ -22,7 +22,7 @@ let params: { [index: string]: string; }, EGE: { [index: string]: number; } = {}
 
 declare global {
     interface Window {
-        diplomaCodes: any;
+        diplomaCodes: any[];
     }
 }
 

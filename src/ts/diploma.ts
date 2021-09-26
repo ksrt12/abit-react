@@ -15,8 +15,6 @@ import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
 import { checkBVI } from "./bvi";
 import { colorBVI, setPinkColor } from "./colors";
 
-let trs: any[] = [];
-
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
 
@@ -73,22 +71,24 @@ const Person = {
 };
 
 function loadDiplomaList(year: number, pid: string) {
-    let s = document.createElement('script');
-    s.onload = () => {
-        trs = [...trs, ...Olymps(year, window.diplomaCodes)];
-    };
+    const s = document.createElement('script');
     s.async = false;
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
     document.head.appendChild(s);
+    return new Promise(resolve => {
+        s.onload = () => resolve(Olymps(year, window.diplomaCodes));
+        s.onerror = () => resolve([]);
+    });
 }
 
 function searchOlymps() {
     const personID = sha256(Person.fullName());
-    //const personID = "b3d5e8abe9b3bcfb27cc3d4a5e612df00ed469b90ec574a931aa1255fa8a924f";
-    const currYEAR = new Date().getFullYear();
-    for (let YEAR = currYEAR; YEAR >= currYEAR - 4; YEAR--) {
-        loadDiplomaList(YEAR, personID);
+    const currYear = new Date().getFullYear();
+    const years = [];
+    for (let year = currYear; year >= currYear - 4; year--) {
+        years.push(loadDiplomaList(year, personID));
     }
+    return years;
 }
 
 function updateStatus(stream: string) {
@@ -119,32 +119,31 @@ function doSearch(rename: any, disable: any) {
     }
     Person.makeName();
     rename("Загрузка...");
-    Promise.resolve()
-        .then(searchOlymps)
-        .then(() => setTimeout(() => {
-            checkTable();
+    Promise.all(searchOlymps()).then(checkTable)
+        .then(() => {
             rename("Проверить");
             disable(true);
-        }, 1000));
+        });
 }
 
 function checkData(reset: boolean) {
-    if (trs.length) {
+    const selector = document.querySelector("#stream > select") as HTMLSelectElement;
+    if (selector) {
         if (reset) {
             RemoveTable();
             document.title = "Олимпиады РСОШ";
-            trs = [];
             for (const j of (document.querySelectorAll(".ege > form > p > input") as any)) {
                 j.value = "";
                 setPinkColor(j.id, false, true);
             }
         } else {
-            updateStatus((document.querySelector("#stream > select") as HTMLSelectElement).value);
+            updateStatus(selector.value);
         }
     }
 }
 
-function checkTable() {
+function checkTable(values: any[]) {
+    const trs = values.flat();
     if (trs.length) {
         InsertTable(Person.getDName(), trs);
     } else {
@@ -159,8 +158,7 @@ function checkTable() {
 
 function loadFromWLS() {
     loadParams();
-    searchOlymps();
-    window.addEventListener("load", checkTable);
+    Promise.all(searchOlymps()).then(checkTable);
 }
 
 if (fromWLS) {

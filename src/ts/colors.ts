@@ -14,7 +14,7 @@ function setBorderColor(elem: HTMLInputElement, color: string) {
     elem.style.borderColor = color;
 }
 
-function colorBVI(newStatus: string, tr?: HTMLTableRowElement) {
+function colorBVI(newStatus: string) {
     let bg: string;
     if (newStatus.includes(bvi + yesconf)) {
         bg = "#a0faad";
@@ -23,11 +23,7 @@ function colorBVI(newStatus: string, tr?: HTMLTableRowElement) {
     } else {
         bg = "";
     }
-    if (tr instanceof HTMLTableRowElement) {
-        setBgColor(tr, bg);
-    } else {
-        return bg;
-    }
+    return bg;
 }
 
 export { setBgColor, setPinkColor, colorBVI };

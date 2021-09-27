@@ -1,7 +1,7 @@
 import { informatics, physics, chemistry, social } from "../ts/constants";
-import { updateStatus } from "../ts/diploma";
 
-function MakeSelector() {
+function MakeSelector(props) {
+    //  const [defVal, setVal]
     const streams = [
         "01.03.02",
         "09.03.02",
@@ -16,12 +16,11 @@ function MakeSelector() {
         "45.03.04",
     ].sort();
 
-    const upd = e => {
-        updateStatus(e.target.selectedOptions[0].label);
-    };
-
     return (
-        <select autoFocus={true} onChange={upd}>
+        <select autoFocus={true}
+            onChange={e => props.setStream(e.target.value)}
+            value={props.stream}
+        >
             {streams.map(val => <option key={val} value={val}>{val}</option>)}
         </select>
     );

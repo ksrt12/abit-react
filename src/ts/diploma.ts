@@ -8,12 +8,11 @@
 
 import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable } from "../UI/FullTable";
-import Olymps from "../UI/Olymps";
+import { getOlymps } from "../UI/Olymps";
 
 import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
 
-import { checkBVI } from "./bvi";
-import { colorBVI, setPinkColor } from "./colors";
+import { setPinkColor } from "./colors";
 
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
@@ -76,7 +75,7 @@ function loadDiplomaList(year: number, pid: string) {
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
     document.head.appendChild(s);
     return new Promise(resolve => {
-        s.onload = () => resolve(Olymps(year, window.diplomaCodes));
+        s.onload = () => resolve(getOlymps(year, window.diplomaCodes));
         s.onerror = () => resolve([]);
     });
 }
@@ -91,32 +90,16 @@ function searchOlymps() {
     return years;
 }
 
-function updateStatus(stream: string) {
-    const textFrom = (row: HTMLTableRowElement, cell: number) => row.cells[cell].innerText;
-    for (const i of (document.querySelector("tbody") as HTMLTableSectionElement).rows) {
-        const newStatus = checkBVI(stream, {
-            name: textFrom(i, 0),
-            lvl: textFrom(i, 1),
-            dip: textFrom(i, 2),
-            subj: textFrom(i, 3),
-            grad: textFrom(i, 5)
-        });
-        i.cells[6].innerHTML = newStatus;
-        colorBVI(newStatus, i);
-    }
-}
-
 function updatePoints(points: number, id: string) {
     const validPoints = (points < 0) ? 0 : (points > 100) ? 100 : points;
     EGE[subjects[id]] = validPoints;
     return validPoints;
 }
 
-function doSearch(rename: any, disable: any) {
+function doSearch(rename: any, disable: any, inputs: HTMLInputElement[]) {
     params = {};
-    for (const i of (document.querySelectorAll("#fio_form > p > input") as any)) {
-        params[i.id] = i.value.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
-    }
+    inputs.forEach(input => params[input.id] = input.value.trim()
+        .toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase()));
     Person.makeName();
     rename("Загрузка...");
     Promise.all(searchOlymps()).then(checkTable)
@@ -137,7 +120,8 @@ function checkData(reset: boolean) {
                 setPinkColor(j.id, false, true);
             }
         } else {
-            updateStatus(selector.value);
+            //
+            // selector.dispatchEvent(new Event('change', { bubbles: true }));
         }
     }
 }
@@ -165,5 +149,5 @@ if (fromWLS) {
     window.addEventListener("DOMContentLoaded", loadFromWLS);
 }
 
-export { doSearch, checkData, updatePoints, updateStatus };
+export { doSearch, checkData, updatePoints };
 export { EGE, yesconf, nonconf };

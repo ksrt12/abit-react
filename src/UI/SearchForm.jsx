@@ -3,11 +3,8 @@ import { checkData, doSearch, updatePoints } from "../ts/diploma";
 import { ids, subjects } from "../ts/constants";
 import test from "../test";
 
-let fortest = false;
 let defs;
-
-// fortest = true;;
-if (fortest) {
+if (process.env.NODE_ENV === "development") {
     defs = test;
 } else {
     defs = { dis: true };
@@ -106,8 +103,11 @@ const FioForm = React.memo(function FioForm({ setDisable }) {
 
 function SearchBtn({ isDisabled, setDisable }) {
     const [btnName, setBtnName] = useState("Проверить");
+    const search = e => doSearch(setBtnName, setDisable,
+        Array.from(e.target.parentElement.querySelector("#fio_form")));
+
     return (
-        <button disabled={isDisabled} onClick={() => doSearch(setBtnName, setDisable)}>{btnName}</button>
+        <button disabled={isDisabled} onClick={search}>{btnName}</button>
     );
 }
 

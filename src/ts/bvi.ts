@@ -6,9 +6,9 @@ import { EGE, yesconf, nonconf } from "./diploma";
 function checkBVI(stream: string, { ...olymp }) {
     let status: string;
     const
-        grad = Number(olymp.grad),
-        lvl = Number(olymp.lvl),
-        dip = Number(olymp.dip),
+        grad = olymp.grad,
+        lvl = olymp.lvl,
+        dip = olymp.dip,
         subj = olymp.subj,
         name = olymp.name;
 

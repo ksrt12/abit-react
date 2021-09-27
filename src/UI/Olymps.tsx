@@ -20,33 +20,51 @@ function getSubTitles(olympName: string) {
     };
 }
 
-function OlympRow(props: { d: any; year: number; }) {
+interface OlympProps {
+    olymp: {
+        name: string,
+        lvl: number,
+        dip: number,
+        subj: string,
+        code: number,
+        grad: number,
+        year: number,
+        status: string;
+    },
+    stream: string;
+}
 
-    const d = props.d;
-    //console.dir(d);
-    const olymp = getSubTitles(d.oa);
-    const status = checkBVI('01.03.02', { grad: d.form, ...olymp });
+function OlympRow(props: OlympProps) {
+    const olymp = props.olymp;
+    const newStatus = checkBVI(props.stream, { ...olymp });
+
     return (
-        <tr style={{ backgroundColor: colorBVI(status) }} >
+        <tr style={{ backgroundColor: colorBVI(newStatus) }}>
             <td>{olymp.name}</td>
             <td>{olymp.lvl}</td>
             <td>{olymp.dip}</td>
             <td>{olymp.subj}</td>
-            <td><MakeLink code={d.code} year={props.year} /></td>
-            <td>{d.form}</td>
-            <td>{status}</td>
+            <td><MakeLink code={olymp.code} year={olymp.year} /></td>
+            <td>{olymp.grad}</td>
+            <td>{newStatus}</td>
         </tr>
     );
 }
 
-function Olymps(year: number, codes: any[]) {
+function getOlymps(year: number, codes: any[]) {
     const trs = [];
     for (const d of codes) {
         if (d.form > 9) {
-            trs.push(<OlympRow year={year} d={d} key={d.code} />);
+            trs.push({
+                year: year,
+                code: d.code,
+                grad: d.form,
+                ...getSubTitles(d.oa),
+            });
         }
     }
     return trs;
 }
 
-export default Olymps;
+export { getOlymps };
+export default OlympRow;

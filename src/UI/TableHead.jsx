@@ -16,7 +16,7 @@ function getSort(event) {
 
 }
 
-function TableHead() {
+function TableHead(props) {
     const heads = [
         'Олимпиада',
         'Уровень',
@@ -30,7 +30,7 @@ function TableHead() {
             <tr>
                 {heads.map(th => <th key={th} onClick={getSort}>{th}</th>)}
                 <th id="stream">
-                    <MakeSelector />
+                    <MakeSelector {...props} />
                 </th>
             </tr>
         </thead>

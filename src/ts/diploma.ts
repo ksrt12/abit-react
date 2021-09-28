@@ -9,7 +9,7 @@
 import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable, updateOutside } from "../UI/FullTable";
 import { WLS, fromWLS, subjects } from "./constants";
-import { setPinkColor } from "./colors";
+import { setPointsColor } from "./colors";
 import { searchOlymps } from "./search";
 
 let nonconf = ' Не подтв.',
@@ -82,9 +82,9 @@ function clearData() {
     if (document.querySelector("#table")) {
         RemoveTable();
         document.title = "Олимпиады РСОШ";
-        for (const j of (document.querySelectorAll(".ege > form > p > input") as any)) {
+        for (const j of (document.querySelectorAll(".ege input") as any)) {
             j.value = "";
-            setPinkColor(j.id, false, true);
+            setPointsColor(j.id, false, true);
         }
     }
 }

@@ -1,6 +1,6 @@
 import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
 import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
-import { setPinkColor } from "./colors";
+import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
 function checkBVI(stream: string, { ...olymp }) {
@@ -485,7 +485,7 @@ function checkConfNum(stream: string, currSubj: string, currProfile?: string) {
         proof = olympSubjBy[currProfile][currSubj].includes(stream);
     }
     if (!fromWLS) {
-        setPinkColor(getIdBySubj(currSubj), Boolean(EGE[currSubj]) === false, conf);
+        setPointsColor(getIdBySubj(currSubj), Boolean(EGE[currSubj]) === false, conf);
     }
     return Number(proof && conf);
 }

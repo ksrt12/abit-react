@@ -1,17 +1,9 @@
 import { bvi, sto } from "./constants";
 import { yesconf } from "./diploma";
 
-function setPinkColor(id: string, isEmpty: boolean, noConf: boolean) {
-    setBgColor((document.querySelector(`[for=${id}]`) as HTMLTableRowElement), (isEmpty) ? "pink" : (noConf) ? "" : "#ffda60");
-    setBorderColor((document.querySelector(`#${id}`) as HTMLInputElement), (isEmpty) ? "red" : (noConf) ? "" : "gold");
-}
-
-function setBgColor(elem: HTMLTableRowElement, color: string) {
-    elem.style.backgroundColor = color;
-}
-
-function setBorderColor(elem: HTMLInputElement, color: string) {
-    elem.style.borderColor = color;
+function setPointsColor(id: string, isEmpty: boolean, noConf: boolean) {
+    (document.querySelector(`[for=${id}]`) as HTMLTableRowElement).style.backgroundColor = isEmpty ? "pink" : noConf ? "" : "#ffda60";
+    (document.querySelector(`#${id}`) as HTMLInputElement).style.borderColor = isEmpty ? "red" : noConf ? "" : "gold";
 }
 
 function colorBVI(newStatus: string) {
@@ -26,4 +18,4 @@ function colorBVI(newStatus: string) {
     return bg;
 }
 
-export { setBgColor, setPinkColor, colorBVI };
+export { setPointsColor, colorBVI };

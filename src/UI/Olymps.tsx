@@ -11,15 +11,6 @@ function MakeLink(props: { year: number; code: number; }) {
     );
 }
 
-function getSubTitles(olympName: string) {
-    return {
-        name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
-        lvl: Number(olympName.substr(olympName.indexOf('уровень') - 2, 1).trim()),
-        dip: Number(olympName.substr(olympName.indexOf('Диплом') + 7, 1).trim()),
-        subj: olympName.substring(olympName.indexOf('("') + 2, olympName.indexOf('")')).toLowerCase().replace('cистемы', 'системы').trim(),
-    };
-}
-
 interface OlympProps {
     olymp: {
         name: string,
@@ -51,20 +42,4 @@ function OlympRow(props: OlympProps) {
     );
 }
 
-function getOlymps(year: number, codes: any[]) {
-    const trs = [];
-    for (const d of codes) {
-        if (d.form > 9) {
-            trs.push({
-                year: year,
-                code: d.code,
-                grad: d.form,
-                ...getSubTitles(d.oa),
-            });
-        }
-    }
-    return trs;
-}
-
-export { getOlymps };
 export default OlympRow;

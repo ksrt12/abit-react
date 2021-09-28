@@ -8,10 +8,7 @@
 
 import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable, updateOutside } from "../UI/FullTable";
-import { getOlymps } from "../UI/Olymps";
-
 import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
-
 import { setPinkColor } from "./colors";
 
 let nonconf = ' Не подтв.',
@@ -68,6 +65,30 @@ const Person = {
         return `${params.NAME} ${params.BD}`;
     }
 };
+
+function getSubTitles(olympName: string) {
+    return {
+        name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
+        lvl: Number(olympName.substr(olympName.indexOf('уровень') - 2, 1).trim()),
+        dip: Number(olympName.substr(olympName.indexOf('Диплом') + 7, 1).trim()),
+        subj: olympName.substring(olympName.indexOf('("') + 2, olympName.indexOf('")')).toLowerCase().replace('cистемы', 'системы').trim(),
+    };
+}
+
+function getOlymps(year: number, codes: any[]) {
+    const trs = [];
+    for (const d of codes) {
+        if (d.form > 9) {
+            trs.push({
+                year: year,
+                code: d.code,
+                grad: d.form,
+                ...getSubTitles(d.oa),
+            });
+        }
+    }
+    return trs;
+}
 
 function loadDiplomaList(year: number, pid: string) {
     const s = document.createElement('script');

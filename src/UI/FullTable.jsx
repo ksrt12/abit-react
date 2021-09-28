@@ -1,19 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import TableHead from "./TableHead";
 import OlympRow from "./Olymps";
 
 const results = () => document.getElementById('results');
 
+let updateOutside = function (ege) { };
+
 function MyTable({ caption, trs }) {
     const [stream, setStream] = useState("01.03.02");
-    console.log("render table. reason:", `${stream}:`);
+    const [, setEge] = useState({});
+    const state = { stream, setStream };
+
+    useEffect(() => {
+        updateOutside = ege => setEge({ ...ege });
+    }, []);
+
     return (
         <table id="table" rules="all" border="all">
             <caption>{caption}</caption>
-            <TableHead setStream={setStream} stream={stream} />
+            <TableHead {...state} />
             <tbody>
-                {trs.map(item => <OlympRow key={item.code} olymp={item} stream={stream} />)}
+                {trs.map(item => <OlympRow key={item.code} olymp={item} {...state} />)}
             </tbody>
         </table>
     );
@@ -31,4 +39,4 @@ function RemoveTable() {
     ReactDOM.unmountComponentAtNode(results());
 }
 
-export { InsertTable, RemoveTable };
+export { InsertTable, RemoveTable, updateOutside };

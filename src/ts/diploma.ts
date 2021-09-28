@@ -7,7 +7,7 @@
  */
 
 import { sha256 } from 'js-sha256';
-import { InsertTable, RemoveTable } from "../UI/FullTable";
+import { InsertTable, RemoveTable, updateOutside } from "../UI/FullTable";
 import { getOlymps } from "../UI/Olymps";
 
 import { WLS, fromWLS, RSROLYMP, subjects } from "./constants";
@@ -93,6 +93,7 @@ function searchOlymps() {
 function updatePoints(points: number, id: string) {
     const validPoints = (points < 0) ? 0 : (points > 100) ? 100 : points;
     EGE[subjects[id]] = validPoints;
+    updateOutside(EGE);
     return validPoints;
 }
 
@@ -109,19 +110,13 @@ function doSearch(rename: any, disable: any, inputs: HTMLInputElement[]) {
         });
 }
 
-function checkData(reset: boolean) {
-    const selector = document.querySelector("#stream > select") as HTMLSelectElement;
-    if (selector) {
-        if (reset) {
-            RemoveTable();
-            document.title = "Олимпиады РСОШ";
-            for (const j of (document.querySelectorAll(".ege > form > p > input") as any)) {
-                j.value = "";
-                setPinkColor(j.id, false, true);
-            }
-        } else {
-            //
-            // selector.dispatchEvent(new Event('change', { bubbles: true }));
+function clearData() {
+    if (document.querySelector("#table")) {
+        RemoveTable();
+        document.title = "Олимпиады РСОШ";
+        for (const j of (document.querySelectorAll(".ege > form > p > input") as any)) {
+            j.value = "";
+            setPinkColor(j.id, false, true);
         }
     }
 }
@@ -149,5 +144,5 @@ if (fromWLS) {
     window.addEventListener("DOMContentLoaded", loadFromWLS);
 }
 
-export { doSearch, checkData, updatePoints };
+export { doSearch, clearData, updatePoints };
 export { EGE, yesconf, nonconf };

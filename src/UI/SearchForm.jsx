@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { checkData, doSearch, updatePoints } from "../ts/diploma";
+import { clearData, doSearch, updatePoints } from "../ts/diploma";
 import { ids, subjects } from "../ts/constants";
-import test from "../test";
+import fio from "../test/fio";
 
 let defs;
 if (process.env.NODE_ENV === "development") {
-    defs = test;
+    defs = fio;
 } else {
     defs = { dis: true };
 }
@@ -51,7 +51,7 @@ const EgeForm = React.memo(function EgeForm() {
     </form>;
 
     return (
-        <div className="ege" onChange={() => checkData(false)} >
+        <div className="ege">
             {Forma(ids.slice(0, 4))}
             {Forma(ids.slice(4))}
         </div>
@@ -93,7 +93,7 @@ const FioForm = React.memo(function FioForm({ setDisable }) {
     ];
 
     return (
-        <div className="fio" onChange={() => checkData(true)} >
+        <div className="fio" onChange={clearData} >
             <form id="fio_form" autoComplete="on" onChange={e => checkFio(e.target.form)}>
                 {fio.map(obj => <DefaultInput key={obj.id} {...obj} />)}
             </form>

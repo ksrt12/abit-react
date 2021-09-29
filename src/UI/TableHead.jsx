@@ -1,3 +1,4 @@
+import React from "react";
 import MakeSelector from "./MakeSelector";
 
 function getSort(event) {
@@ -16,7 +17,7 @@ function getSort(event) {
 
 }
 
-function TableHead(props) {
+const TableHead = React.memo(function TableHead(props) {
     const heads = [
         'Олимпиада',
         'Уровень',
@@ -36,6 +37,6 @@ function TableHead(props) {
         </thead>
     );
 
-}
+});
 
 export default TableHead;

@@ -2,30 +2,15 @@ import { RSROLYMP } from "../ts/constants";
 import { colorBVI } from "../ts/colors";
 import { checkBVI } from "../ts/bvi";
 
-function MakeLink(props: { year: number; code: number; }) {
-    const code = props.code.toString();
+function MakeLink({ year, code }) {
     return (
-        <a href={`${RSROLYMP}${props.year}/by-code/${code}/white.pdf`}>
-            {code.replace(/([0-9]{3})([0-9]{4})([0-9]{4})/, '$1 $2-$3')}
+        <a href={`${RSROLYMP}${year}/by-code/${code}/white.pdf`}>
+            {code.toString().replace(/([0-9]{3})([0-9]{4})([0-9]{4})/, '$1 $2-$3')}
         </a>
     );
 }
 
-interface OlympProps {
-    olymp: {
-        name: string,
-        lvl: number,
-        dip: number,
-        subj: string,
-        code: number,
-        grad: number,
-        year: number,
-        status: string;
-    },
-    stream: string;
-}
-
-function OlympRow(props: OlympProps) {
+function OlympRow(props) {
     const olymp = props.olymp;
     const newStatus = checkBVI(props.stream, { ...olymp });
 

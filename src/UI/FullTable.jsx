@@ -9,12 +9,14 @@ let updateOutside = function (ege) { };
 
 function MyTable({ caption, trs }) {
     const [stream, setStream] = useState("01.03.02");
-    const [, setEge] = useState({});
+    const [points, setEge] = useState({});
     const state = { stream, setStream };
 
     useEffect(() => {
         updateOutside = ege => setEge({ ...ege });
     }, []);
+
+    console.log(`render table: stream: ${stream},\n ege:`, points);
 
     return (
         <table id="table" rules="all" border="all">

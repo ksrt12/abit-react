@@ -12,7 +12,7 @@ function MakeLink({ year, code }) {
 
 function OlympRow(props) {
     const olymp = props.olymp;
-    const newStatus = checkBVI(props.stream, { ...olymp });
+    const newStatus = checkBVI(props.stream, olymp);
 
     return (
         <tr style={{ backgroundColor: colorBVI(newStatus) }}>

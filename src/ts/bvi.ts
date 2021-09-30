@@ -3,7 +3,11 @@ import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
 import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
-function checkBVI(stream: string, { ...olymp }) {
+interface olymp {
+    grad: number, lvl: number, dip: number, subj: string, name: string;
+}
+
+function checkBVI(stream: string, olymp: olymp) {
     let status: string;
     const
         grad = olymp.grad,

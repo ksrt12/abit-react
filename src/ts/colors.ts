@@ -1,9 +1,9 @@
 import { bvi, sto } from "./constants";
 import { yesconf } from "./diploma";
 
-function setPointsColor(id: string, isEmpty: boolean, isConf: boolean) {
-    (document.querySelector(`[for=${id}]`) as HTMLLabelElement).style.backgroundColor = isEmpty ? "pink" : isConf ? "" : "#ffda60";
-    (document.querySelector(`#${id}`) as HTMLInputElement).style.borderColor = isEmpty ? "red" : isConf ? "" : "gold";
+function setPointsColor(id: string, isStream: boolean, isEmpty?: boolean, isConf?: boolean) {
+    (document.querySelector(`[for=${id}]`) as HTMLLabelElement).style.backgroundColor = isStream ? isEmpty ? "pink" : isConf ? "" : "#ffda60" : "";
+    (document.querySelector(`#${id}`) as HTMLInputElement).style.borderColor = isStream ? isEmpty ? "red" : isConf ? "" : "gold" : "";
 }
 
 function colorBVI(newStatus: string) {

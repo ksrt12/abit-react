@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { clearData, doSearch, updatePoints } from "../ts/diploma";
-import { ids, subjects } from "../ts/constants";
+import { subjects } from "../ts/constants";
 import fio from "../test/fio";
 
 let defs;
@@ -34,7 +34,7 @@ function DefaultInput({ id, label, def, ...inputProps }) {
 }
 
 const EgeForm = React.memo(function EgeForm() {
-    console.log("render egeform");
+    const ids = Object.keys(subjects);
     const getSubj = id => {
         const subj = subjects[id];
         return subj[0].toUpperCase() + subj.slice(1);
@@ -59,7 +59,6 @@ const EgeForm = React.memo(function EgeForm() {
 });
 
 const FioForm = React.memo(function FioForm({ setDisable }) {
-    console.log("render fioform");
     const checkFio = form => setDisable(!Boolean(form[0].value && form[1].value));
     const fio = [
         {

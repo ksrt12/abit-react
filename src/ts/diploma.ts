@@ -84,7 +84,7 @@ function clearData() {
         document.title = "Олимпиады РСОШ";
         for (const j of (document.querySelectorAll(".ege input") as any)) {
             j.value = "";
-            setPointsColor(j.id, false, true);
+            setPointsColor(j.id, false);
         }
     }
 }

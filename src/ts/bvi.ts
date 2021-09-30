@@ -1,5 +1,5 @@
 import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
-import { olympSubjBy, subjects, ids, fromWLS } from "./constants";
+import { olympSubjBy, ids, fromWLS } from "./constants";
 import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 
@@ -477,25 +477,18 @@ function checkBVI(stream: string, olymp: olymp) {
     return status;
 }
 
-function getIdBySubj(subj: string) {
-    return ids.filter(id => subjects[id] === subj).toString();
-}
-
-function checkConfNum(stream: string, currSubj: string, currProfile?: string) {
-    let proof = true;
-    const conf = EGE[currSubj] >= confPoints;
-
-    if (currProfile) {
-        proof = olympSubjBy[currProfile][currSubj].includes(stream);
-    }
+function checkConfNum(currSubj: string, multiSubjs?: any, stream?: string) {
+    const currEge = EGE[currSubj];
+    const proof = (stream) ? multiSubjs[currSubj].includes(stream) : true;
+    const conf = currEge >= confPoints;
     if (!fromWLS) {
-        setPointsColor(getIdBySubj(currSubj), Boolean(EGE[currSubj]) === false, conf);
+        setPointsColor(ids[currSubj], proof, Boolean(currEge) === false, conf);
     }
-    return Number(proof && conf);
+    return proof && conf;
 }
 
 function checkConf(stream: string, olympProfile: string) {
-    let stat = 0;
+    let stat = false;
     const confSubj = olympSubjBy[olympProfile];
     switch (typeof confSubj) {
         case 'undefined':
@@ -504,16 +497,19 @@ function checkConf(stream: string, olympProfile: string) {
             return wtf;
         case 'object':
             for (const i of Object.keys(confSubj)) {
-                stat += checkConfNum(stream, i, olympProfile);
+                stat = checkConfNum(i, confSubj, stream);
+                if (stat) {
+                    break;
+                }
             }
             break;
         case 'string':
-            stat = checkConfNum(stream, confSubj);
+            stat = checkConfNum(confSubj);
             break;
         default:
             alert("Ну параша, девки!");
     }
-    return (stat > 0) ? yesconf : nonconf;
+    return (stat) ? yesconf : nonconf;
 }
 
 export { checkBVI };

@@ -17,12 +17,6 @@ let nonconf = ' Не подтв.',
 
 let person: { [index: string]: string; }, EGE: { [index: string]: number; } = {};
 
-declare global {
-    interface Window {
-        diplomaCodes: any[];
-    }
-}
-
 function getParamsFrom(pars: string, spl1: string, spl2: string, num = false) {
     let obj: { [index: string]: any; } = {};
     return decodeURIComponent(pars).split(spl1).reduce((p, e) => {

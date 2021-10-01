@@ -1,5 +1,19 @@
 import { RSROLYMP } from "./constants";
 
+interface dCodes {
+    code: number,
+    oa: string,
+    name: string,
+    form: number,
+    hashed: string;
+}
+
+declare global {
+    interface Window {
+        diplomaCodes: dCodes[];
+    }
+}
+
 function getSubTitles(olympName: string) {
     return {
         name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
@@ -9,7 +23,7 @@ function getSubTitles(olympName: string) {
     };
 }
 
-function getOlymps(year: number, codes: any[]) {
+function getOlymps(year: number, codes: dCodes[]) {
     const trs = [];
     for (const d of codes) {
         if (d.form > 9) {

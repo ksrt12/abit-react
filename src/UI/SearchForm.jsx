@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { clearData, doSearch, updatePoints } from "../ts/diploma";
 import { subjects } from "../ts/constants";
-import fio from "../test/fio";
 
-let defs;
-if (process.env.NODE_ENV === "development") {
-    defs = fio;
-} else {
-    defs = { dis: true };
+let defs = { dis: true };
+if (process.env.NODE_ENV === "development" && false) {
+    const fio = require("../test");
+    defs = fio.default;
 }
 
 function DefaultInput({ id, label, def, ...inputProps }) {

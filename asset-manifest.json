@@ -1,26 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.24494721.chunk.css",
-    "main.js": "/static/js/main.afa7713e.chunk.js",
-    "main.js.map": "/static/js/main.afa7713e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c6098675.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c6098675.js.map",
-    "static/js/2.a011a9f2.chunk.js": "/static/js/2.a011a9f2.chunk.js",
-    "static/js/2.a011a9f2.chunk.js.map": "/static/js/2.a011a9f2.chunk.js.map",
-    "static/js/3.08ef71cf.chunk.js": "/static/js/3.08ef71cf.chunk.js",
-    "static/js/3.08ef71cf.chunk.js.map": "/static/js/3.08ef71cf.chunk.js.map",
+    "main.css": "/static/css/main.d46801fa.css",
+    "main.js": "/static/js/main.0aa5375a.js",
+    "static/js/787.a243a10b.chunk.js": "/static/js/787.a243a10b.chunk.js",
+    "static/media/2020.pdf": "/static/media/2020.64989f328985dd5705f9.pdf",
+    "static/media/2018.pdf": "/static/media/2018.fdaf10c8a768aad270ba.pdf",
+    "static/media/2021.pdf": "/static/media/2021.b2a34cd8a2292ba95c7c.pdf",
+    "static/media/2019.pdf": "/static/media/2019.5fdb8996b771ea1a5f54.pdf",
     "index.html": "/index.html",
-    "static/css/main.24494721.chunk.css.map": "/static/css/main.24494721.chunk.css.map",
-    "static/js/2.a011a9f2.chunk.js.LICENSE.txt": "/static/js/2.a011a9f2.chunk.js.LICENSE.txt",
-    "static/media/2018.pdf": "/static/media/2018.fdaf10c8.pdf",
-    "static/media/2019.pdf": "/static/media/2019.5fdb8996.pdf",
-    "static/media/2020.pdf": "/static/media/2020.64989f32.pdf",
-    "static/media/2021.pdf": "/static/media/2021.b2a34cd8.pdf"
+    "main.d46801fa.css.map": "/static/css/main.d46801fa.css.map",
+    "main.0aa5375a.js.map": "/static/js/main.0aa5375a.js.map",
+    "787.a243a10b.chunk.js.map": "/static/js/787.a243a10b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.c6098675.js",
-    "static/js/2.a011a9f2.chunk.js",
-    "static/css/main.24494721.chunk.css",
-    "static/js/main.afa7713e.chunk.js"
+    "static/css/main.d46801fa.css",
+    "static/js/main.0aa5375a.js"
   ]
 }

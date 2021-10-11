@@ -7,14 +7,8 @@ interface olymp {
     grad: number, lvl: number, dip: number, subj: string, name: string;
 }
 
-function checkBVI(stream: string, olymp: olymp) {
+function checkBVI(stream: string, { grad, lvl, dip, subj, name }: olymp) {
     let status: string;
-    const
-        grad = olymp.grad,
-        lvl = olymp.lvl,
-        dip = olymp.dip,
-        subj = olymp.subj,
-        name = olymp.name;
 
     const ch75 = checkConf(stream, subj);
     const bviORia = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;

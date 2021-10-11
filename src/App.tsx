@@ -5,14 +5,16 @@ import { fromWLS } from "./ts/constants";
 
 function App() {
     return (
-        <div>
-            <Links />
-            <div className="main">
-                {!fromWLS && (<SearchForm />)}
-                <div id="results"></div>
+        <>
+            <div className="content">
+                <Links />
+                <div className="main">
+                    {!fromWLS && (<SearchForm />)}
+                    <div id="results"></div>
+                </div>
             </div>
             <Copyright />
-        </div>
+        </>
     );
 }
 

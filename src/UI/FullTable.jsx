@@ -33,6 +33,9 @@ function InsertTable(caption, trs) {
         <MyTable caption={caption} trs={trs} />,
         results()
     );
+    if (window.screen.width < 930) {
+        document.querySelector(".main").style.width = "fit-content";
+    }
 }
 
 function RemoveTable() {

@@ -147,6 +147,7 @@ html {
                                 width: 85px;
                             }
                             &:not(#stream) {
+                                padding: 0 5px;
                                 &:hover {
                                     cursor: pointer;
                                     background: #bae0f5;
@@ -167,17 +168,20 @@ html {
                             &:hover {
                                 background-color: #bae0f5;
                             }
+                            td {
+                                padding: 0 5px;
 
-                            a {
-                                white-space: nowrap;
-                                color: #030d10;
+                                a {
+                                    white-space: nowrap;
+                                    color: #030d10;
 
-                                &:visited {
-                                    color: #8a00ad;
-                                }
-                                &:hover {
-                                    color: #0045ad;
-                                    text-decoration: underline;
+                                    &:visited {
+                                        color: #8a00ad;
+                                    }
+                                    &:hover {
+                                        color: #0045ad;
+                                        text-decoration: underline;
+                                    }
                                 }
                             }
                         }

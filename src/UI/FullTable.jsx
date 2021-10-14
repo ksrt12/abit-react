@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import TableHead from "./TableHead";
 import OlympRow from "./Olymps";
+import { fromWLS } from "../ts/constants";
 
 const results = () => document.getElementById('results');
 
@@ -33,7 +34,7 @@ function InsertTable(caption, trs) {
         <MyTable caption={caption} trs={trs} />,
         results()
     );
-    if (window.screen.width < 930) {
+    if (window.screen.width < 930 || fromWLS) {
         document.querySelector(".main").style.width = "fit-content";
     }
 }

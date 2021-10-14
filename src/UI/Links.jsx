@@ -20,7 +20,7 @@ function Links() {
     return (
         <div className="links">
             <div className="side left">
-                {years.map(year => Link(PDFs[year].default, `Списки ВСЕРОСа ${year}`, year))}
+                {years.map(year => Link(PDFs[year], `Списки ВСЕРОСа ${year}`, year))}
             </div>
             <div className="side right">
                 {Object.keys(links).map(href => Link(abit + href, links[href]))}

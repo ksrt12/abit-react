@@ -10,15 +10,25 @@ import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable, updateOutside } from "../UI/FullTable";
 import { WLS, fromWLS, subjects } from "./constants";
 import { setPointsColor } from "./colors";
-import { searchOlymps } from "./search";
+import { searchOlymps, Iolymp } from "./search";
 
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
 
-let person: { [index: string]: string; }, EGE: { [index: string]: number; } = {};
+interface IPerson {
+    [index: string]: string;
+}
 
-function getParamsFrom(pars: string, spl1: string, spl2: string, num = false) {
-    let obj: { [index: string]: any; } = {};
+interface IEGE {
+    [index: string]: number;
+}
+
+let person: IPerson, EGE: IEGE = {};
+
+function getParamsFrom(pars: string, spl1: string, spl2: string): IPerson;
+function getParamsFrom(pars: string, spl1: string, spl2: string, num: boolean): IEGE;
+function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) {
+    let obj: { [index: string]: string | number; } = {};
     return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
         const [key, val]: string[] = e.split(spl2);
         if (num) {
@@ -59,7 +69,7 @@ function updatePoints(points: number, id: string) {
     return validPoints;
 }
 
-function doSearch(rename: any, disable: any, inputs: HTMLInputElement[]) {
+function doSearch<F extends Function>(rename: F, disable: F, inputs: HTMLInputElement[]) {
     person = {};
     inputs.forEach(input => person[input.id] = input.value.trim()
         .toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase()));
@@ -76,14 +86,14 @@ function clearData() {
     if (document.querySelector("#table")) {
         RemoveTable();
         document.title = "Олимпиады РСОШ";
-        for (const j of (document.querySelectorAll(".ege input") as any)) {
+        for (const j of document.querySelectorAll<HTMLInputElement>(".ege input")) {
             j.value = "";
             setPointsColor(j.id, false);
         }
     }
 }
 
-function checkTable(values: any[]) {
+function checkTable(values: Iolymp[][]) {
     const trs = values.flat();
     if (trs.length) {
         InsertTable(person.Dname, trs);

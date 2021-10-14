@@ -2,12 +2,9 @@ import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
 import { olympSubjBy, ids, fromWLS } from "./constants";
 import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
+import { Iolymp } from "./search";
 
-interface olymp {
-    grad: number, lvl: number, dip: number, subj: string, name: string;
-}
-
-function checkBVI(stream: string, { grad, lvl, dip, subj, name }: olymp) {
+function checkBVI(stream: string, { grad, lvl, dip, subj, name }: Iolymp) {
     let status: string;
 
     const ch75 = checkConf(stream, subj);
@@ -471,9 +468,9 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: olymp) {
     return status;
 }
 
-function checkConfNum(currSubj: string, multiSubjs?: any, stream?: string) {
+function checkConfNum(currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {
     const currEge = EGE[currSubj];
-    const proof = (stream) ? multiSubjs[currSubj].includes(stream) : true;
+    const proof = (stream) ? multiSubjs![currSubj].includes(stream) : true;
     const conf = currEge >= confPoints;
     if (!fromWLS) {
         setPointsColor(ids[currSubj], proof, Boolean(currEge) === false, conf);

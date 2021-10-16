@@ -1,6 +1,6 @@
 import { RSROLYMP } from "./constants";
 
-interface Icodes {
+interface ICodes {
     code: number,
     oa: string,
     name: string,
@@ -8,7 +8,7 @@ interface Icodes {
     hashed: string;
 }
 
-interface Iolymp {
+interface IOlymp {
     name: string;
     lvl: number;
     dip: number;
@@ -20,7 +20,7 @@ interface Iolymp {
 
 declare global {
     interface Window {
-        diplomaCodes: Icodes[];
+        diplomaCodes: ICodes[];
     }
 }
 
@@ -33,7 +33,7 @@ function getSubTitles(olympName: string) {
     };
 }
 
-function getOlymps(year: number, codes: Icodes[]): Iolymp[] {
+function getOlymps(year: number, codes: ICodes[]): IOlymp[] {
     const trs = [];
     for (const d of codes) {
         if (d.form > 9) {
@@ -48,7 +48,7 @@ function getOlymps(year: number, codes: Icodes[]): Iolymp[] {
     return trs;
 }
 
-function loadDiplomaList(year: number, pid: string): Promise<Iolymp[]> {
+function loadDiplomaList(year: number, pid: string): Promise<IOlymp[]> {
     const s = document.createElement('script');
     s.async = false;
     s.src = `${RSROLYMP}${year}/by-person-released/${pid}/codes.js`;
@@ -69,4 +69,4 @@ function searchOlymps(personID: string) {
 }
 
 export { searchOlymps };
-export type { Iolymp };
+export type { IOlymp };

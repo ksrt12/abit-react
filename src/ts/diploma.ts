@@ -10,7 +10,7 @@ import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable, updateOutside } from "../ui/FullTable";
 import { WLS, fromWLS, subjects } from "./constants";
 import { setPointsColor } from "./colors";
-import { searchOlymps, Iolymp } from "./search";
+import { searchOlymps, IOlymp } from "./search";
 import React from "react";
 
 let nonconf = ' Не подтв.',
@@ -94,7 +94,7 @@ function clearData() {
     }
 }
 
-function checkTable(values: Iolymp[][]) {
+function checkTable(values: IOlymp[][]) {
     const trs = values.flat();
     if (trs.length) {
         InsertTable(person.Dname, trs);

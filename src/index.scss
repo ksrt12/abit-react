@@ -135,6 +135,7 @@ html {
                         margin: 10px 0;
                         table-layout: auto;
                         width: inherit;
+                        border-collapse: collapse;
 
                         caption {
                             padding-bottom: 15px;
@@ -142,12 +143,18 @@ html {
                             font-size: 20px;
                         }
 
+                        tr {
+                            height: 52px;
+                        }
+
                         th {
+                            border: 1px solid black;
+                            padding: 0 5px;
+
                             &#stream {
                                 width: 85px;
                             }
                             &:not(#stream) {
-                                padding: 0 5px;
                                 &:hover {
                                     cursor: pointer;
                                     background: #bae0f5;
@@ -163,24 +170,27 @@ html {
                             }
                         }
 
-                        tr {
-                            height: 52px;
-                            &:hover {
-                                background-color: #bae0f5;
-                            }
-                            td {
-                                padding: 0 5px;
+                        tbody {
+                            tr {
+                                &:hover {
+                                    background-color: #bae0f5 !important;
+                                }
 
-                                a {
-                                    white-space: nowrap;
-                                    color: #030d10;
+                                td {
+                                    border: 1px solid black;
+                                    padding: 0 5px;
 
-                                    &:visited {
-                                        color: #8a00ad;
-                                    }
-                                    &:hover {
-                                        color: #0045ad;
-                                        text-decoration: underline;
+                                    a {
+                                        white-space: nowrap;
+                                        color: #030d10;
+
+                                        &:visited {
+                                            color: #8a00ad;
+                                        }
+                                        &:hover {
+                                            color: #0045ad;
+                                            text-decoration: underline;
+                                        }
                                     }
                                 }
                             }

@@ -2,9 +2,9 @@ import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
 import { olympSubjBy, ids, fromWLS } from "./constants";
 import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
-import { Iolymp } from "./search";
+import { IOlymp } from "./search";
 
-function checkBVI(stream: string, { grad, lvl, dip, subj, name }: Iolymp) {
+function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
     let status: string;
 
     const ch75 = checkConf(stream, subj);

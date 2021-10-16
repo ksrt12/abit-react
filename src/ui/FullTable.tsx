@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TableHead from "./TableHead";
 import OlympRow from "./Olymps";
 import { fromWLS } from "../ts/constants";
-import { Iolymp } from "../ts/search";
+import { IOlymp } from "../ts/search";
 
 const results = () => document.getElementById('results')!;
 
@@ -11,7 +11,7 @@ let updateOutside = function (ege: any) { };
 
 interface IMyTable {
     caption: string;
-    trs: Iolymp[];
+    trs: IOlymp[];
 }
 
 interface IStreamState {
@@ -39,7 +39,7 @@ const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
     );
 };
 
-function InsertTable(caption: string, trs: Iolymp[]) {
+function InsertTable(caption: string, trs: IOlymp[]) {
     document.title = caption;
     ReactDOM.render(
         <MyTable caption={caption} trs={trs} />,

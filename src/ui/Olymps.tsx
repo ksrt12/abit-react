@@ -1,7 +1,7 @@
 import { RSROLYMP } from "../ts/constants";
 import { colorBVI } from "../ts/colors";
 import { checkBVI } from "../ts/bvi";
-import { Iolymp } from "../ts/search";
+import { IOlymp } from "../ts/search";
 
 interface IMakeLink {
     year: number;
@@ -17,13 +17,12 @@ const MakeLink: React.FC<IMakeLink> = ({ year, code }) => {
 };
 
 interface IOlympRow {
-    olymp: Iolymp;
+    olymp: IOlymp;
     stream: string;
 }
 
-const OlympRow: React.FC<IOlympRow> = (props) => {
-    const olymp = props.olymp;
-    const newStatus = checkBVI(props.stream, olymp);
+const OlympRow: React.FC<IOlympRow> = ({ stream, olymp }) => {
+    const newStatus = checkBVI(stream, olymp);
 
     return (
         <tr style={{ backgroundColor: colorBVI(newStatus) }}>

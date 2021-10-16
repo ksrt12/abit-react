@@ -28,7 +28,6 @@ let person: IPerson, EGE: IEGE = {};
 function getParamsFrom(pars: string, spl1: string, spl2: string): IPerson;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num: boolean): IEGE;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) {
-    let obj: { [index: string]: string | number; } = {};
     return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
         const [key, val]: string[] = e.split(spl2);
         if (num) {
@@ -37,7 +36,7 @@ function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) 
             p[key] = val;
         }
         return p;
-    }, obj);
+    }, {} as IPerson | IEGE);
 }
 
 function loadParams() {

@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { clearData, doSearch, updatePoints } from "../ts/diploma";
 import { subjects } from "../ts/constants";
-import { IDefs, IDefaultInput, IFioForm, ISearchBtn } from "./interfaces";
+
+interface IDefs {
+    dis: boolean;
+    LN?: string;
+    FN?: string;
+    MN?: string;
+    BD?: string;
+}
 
 let defs: IDefs = { dis: true };
 if (process.env.NODE_ENV === "development" && false) {
     const fio = require("../test");
     defs = fio.default;
+}
+
+interface IDefaultInput {
+    id: string;
+    label: string;
+    type: string;
+    def?: string;
+    placeholder?: string;
+    maxLength?: number;
+    min?: string;
+    max?: string;
+    key?: string | React.Key;
 }
 
 const DefaultInput: React.FC<IDefaultInput> = ({ id, label, def, ...inputProps }) => {
@@ -57,6 +76,10 @@ const EgeForm: React.FC = React.memo(() => {
     );
 });
 
+interface IFioForm {
+    setDisable: React.Dispatch<boolean>;
+}
+
 const FioForm: React.FC<IFioForm> = React.memo(({ setDisable }) => {
     const checkFio = (e: React.ChangeEvent<HTMLFormElement>) => {
         const form = e.target.form;
@@ -101,6 +124,10 @@ const FioForm: React.FC<IFioForm> = React.memo(({ setDisable }) => {
         </div>
     );
 });
+
+interface ISearchBtn extends IFioForm {
+    isDisabled: boolean;
+}
 
 const SearchBtn: React.FC<ISearchBtn> = ({ isDisabled, setDisable }) => {
     const [btnName, setBtnName] = useState("Проверить");

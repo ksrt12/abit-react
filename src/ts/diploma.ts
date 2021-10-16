@@ -7,10 +7,11 @@
  */
 
 import { sha256 } from 'js-sha256';
-import { InsertTable, RemoveTable, updateOutside } from "../UI/FullTable";
+import { InsertTable, RemoveTable, updateOutside } from "../ui/FullTable";
 import { WLS, fromWLS, subjects } from "./constants";
 import { setPointsColor } from "./colors";
 import { searchOlymps, Iolymp } from "./search";
+import React from "react";
 
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
@@ -65,11 +66,12 @@ function updatePoints(points: number, id: string) {
     const validPoints = (points < 0) ? 0 : (points > 100) ? 100 : points;
     EGE[subjects[id]] = validPoints;
     updateOutside(EGE);
-    return validPoints;
+    return validPoints.toString();
 }
 
-function doSearch<F extends Function>(rename: F, disable: F, inputs: HTMLInputElement[]) {
+function doSearch(rename: React.Dispatch<string>, disable: React.Dispatch<boolean>) {
     person = {};
+    const inputs = Array.from(document.querySelector("#fio_form") as HTMLFormElement) as HTMLInputElement[];
     inputs.forEach(input => person[input.id] = input.value.trim()
         .toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase()));
     makeName();

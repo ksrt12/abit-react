@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { clearData, doSearch, updatePoints } from "../ts/diploma";
 import { subjects } from "../ts/constants";
+import { IDefs, IDefaultInput, IFioForm, ISearchBtn } from "./interfaces";
 
-let defs = { dis: true };
+let defs: IDefs = { dis: true };
 if (process.env.NODE_ENV === "development" && false) {
     const fio = require("../test");
     defs = fio.default;
 }
 
-function DefaultInput({ id, label, def, ...inputProps }) {
+const DefaultInput: React.FC<IDefaultInput> = ({ id, label, def, ...inputProps }) => {
     const [val, setVal] = useState(def || "");
-    const validate = e => {
+    const validate = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
 
         const target = e.target;
@@ -29,16 +30,16 @@ function DefaultInput({ id, label, def, ...inputProps }) {
             <input id={id} {...inputProps} value={val} onChange={validate} />
         </p>
     );
-}
+};
 
-const EgeForm = React.memo(function EgeForm() {
+const EgeForm: React.FC = React.memo(() => {
     const ids = Object.keys(subjects);
-    const getSubj = id => {
+    const getSubj = (id: string) => {
         const subj = subjects[id];
         return subj[0].toUpperCase() + subj.slice(1);
     };
-    const Forma = arr => <form>
-        {arr.map(id => <DefaultInput
+    const Forma = (arr: string[]) => <form>
+        {arr.map((id: string) => <DefaultInput
             key={id}
             id={id}
             label={getSubj(id)}
@@ -56,8 +57,11 @@ const EgeForm = React.memo(function EgeForm() {
     );
 });
 
-const FioForm = React.memo(function FioForm({ setDisable }) {
-    const checkFio = form => setDisable(!Boolean(form[0].value && form[1].value));
+const FioForm: React.FC<IFioForm> = React.memo(({ setDisable }) => {
+    const checkFio = (e: React.ChangeEvent<HTMLFormElement>) => {
+        const form = e.target.form;
+        setDisable(!Boolean(form[0].value && form[1].value));
+    };
     const fio = [
         {
             id: "LN", type: "text",
@@ -91,24 +95,23 @@ const FioForm = React.memo(function FioForm({ setDisable }) {
 
     return (
         <div className="fio" onChange={clearData} >
-            <form id="fio_form" autoComplete="on" onChange={e => checkFio(e.target.form)}>
+            <form id="fio_form" autoComplete="on" onChange={checkFio}>
                 {fio.map(obj => <DefaultInput key={obj.id} {...obj} />)}
             </form>
         </div>
     );
 });
 
-function SearchBtn({ isDisabled, setDisable }) {
+const SearchBtn: React.FC<ISearchBtn> = ({ isDisabled, setDisable }) => {
     const [btnName, setBtnName] = useState("Проверить");
-    const search = e => doSearch(setBtnName, setDisable,
-        Array.from(e.target.parentElement.querySelector("#fio_form")));
+    const search = (e: React.MouseEvent<HTMLButtonElement>) => doSearch(setBtnName, setDisable);
 
     return (
         <button disabled={isDisabled} onClick={search}>{btnName}</button>
     );
-}
+};
 
-function SearchForm() {
+const SearchForm: React.FC = () => {
     const [isDisabled, setDisable] = useState(defs.dis);
     const props = { isDisabled, setDisable };
 
@@ -121,6 +124,6 @@ function SearchForm() {
             <SearchBtn {...props} />
         </div>
     );
-}
+};
 
 export default SearchForm;

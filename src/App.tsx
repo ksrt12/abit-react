@@ -1,6 +1,6 @@
-import Links from "./UI/Links";
-import SearchForm from "./UI/SearchForm";
-import Copyright from "./UI/Copyright";
+import Links from "./ui/Links";
+import SearchForm from "./ui/SearchForm";
+import Copyright from "./ui/Copyright";
 import { fromWLS } from "./ts/constants";
 
 function App() {

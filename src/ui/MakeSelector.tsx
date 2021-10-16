@@ -1,7 +1,8 @@
 import { informatics, physics, chemistry, social } from "../ts/constants";
+import { IStreamState } from "./FullTable";
 
-function MakeSelector(props) {
-    //  const [defVal, setVal]
+const MakeSelector: React.FC<IStreamState> = (props) => {
+
     const streams = [
         "01.03.02",
         "09.03.02",

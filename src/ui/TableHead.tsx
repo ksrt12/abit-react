@@ -1,23 +1,24 @@
 import React from "react";
+import { IStreamState } from "./FullTable";
 import MakeSelector from "./MakeSelector";
 
-function getSort(event) {
-    const target = event.target;
+function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
+    const target = event.target as any;
     const order = (target.dataset.order = -(target.dataset.order || -1));
-    const index = [...target.parentNode.cells].indexOf(target);
+    const index = [...target.parentNode!.cells].indexOf(target);
     const collator = new Intl.Collator(['en', 'ru'], { numeric: true });
-    const comparator = (index, order) => (a, b) => order * collator.compare(
+    const comparator = (index: number, order: number) => (a: any, b: any) => order * collator.compare(
         a.children[index].innerHTML,
         b.children[index].innerHTML
     );
     for (const tBody of target.closest('table').tBodies)
         tBody.append(...[...tBody.rows].sort(comparator(index, order)));
-    for (const cell of target.parentNode.cells)
+    for (const cell of target.parentNode!.cells)
         cell.classList.toggle('sorted', cell === target);
 
 }
 
-const TableHead = React.memo(function TableHead(props) {
+const TableHead: React.FC<IStreamState> = React.memo((props) => {
     const heads = [
         'Олимпиада',
         'Уровень',

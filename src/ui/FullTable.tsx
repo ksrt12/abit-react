@@ -14,11 +14,6 @@ interface IMyTable {
     trs: IOlymp[];
 }
 
-interface IStreamState {
-    stream: string;
-    setStream: React.Dispatch<string>;
-}
-
 const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
     const [stream, setStream] = useState("01.03.02");
     const [, setEge] = useState({});
@@ -55,4 +50,3 @@ function RemoveTable() {
 }
 
 export { InsertTable, RemoveTable, updateOutside };
-export type { IStreamState };

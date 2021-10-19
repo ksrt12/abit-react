@@ -1,5 +1,10 @@
 import { informatics, physics, chemistry, social } from "../ts/constants";
-import { IStreamState } from "./FullTable";
+import { TSetState } from "../ts/diploma";
+
+interface IStreamState {
+    stream: string;
+    setStream: TSetState<string>;
+}
 
 const MakeSelector: React.FC<IStreamState> = (props) => {
 
@@ -28,3 +33,4 @@ const MakeSelector: React.FC<IStreamState> = (props) => {
 };
 
 export default MakeSelector;
+export type { IStreamState };

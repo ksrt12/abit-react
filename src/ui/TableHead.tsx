@@ -1,6 +1,5 @@
 import React from "react";
-import { IStreamState } from "./FullTable";
-import MakeSelector from "./MakeSelector";
+import MakeSelector, { IStreamState } from "./MakeSelector";
 
 function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
     const target = event.target as any;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { clearData, doSearch, updatePoints } from "../ts/diploma";
+import { clearData, doSearch, TSetState, updatePoints } from "../ts/diploma";
 import { subjects } from "../ts/constants";
 
 interface IDefs {
@@ -77,7 +77,7 @@ const EgeForm: React.FC = React.memo(() => {
 });
 
 interface IFioForm {
-    setDisable: React.Dispatch<boolean>;
+    setDisable: TSetState<boolean>;
 }
 
 const FioForm: React.FC<IFioForm> = React.memo(({ setDisable }) => {

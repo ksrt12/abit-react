@@ -1,17 +1,11 @@
-/**
- * @name diploma.js
- * @author diploma.rsr-olymp.ru, Kazakov Stepan
- * @copyright 2020, diploma.rsr-olymp.ru
- * @copyright 2020-2021, kazakovstepan
- * @for ITMO University
- */
-
+import React from "react";
 import { sha256 } from 'js-sha256';
 import { InsertTable, RemoveTable, updateOutside } from "../ui/FullTable";
 import { WLS, fromWLS, subjects } from "./constants";
 import { setPointsColor } from "./colors";
 import { searchOlymps, IOlymp } from "./search";
-import React from "react";
+
+type TSetState<T> = React.Dispatch<React.SetStateAction<T>>;
 
 let nonconf = ' Не подтв.',
     yesconf = ' Подтв.';
@@ -69,7 +63,7 @@ function updatePoints(points: number, id: string) {
     return validPoints.toString();
 }
 
-function doSearch(rename: React.Dispatch<string>, disable: React.Dispatch<boolean>) {
+function doSearch(rename: TSetState<string>, disable: TSetState<boolean>) {
     person = {};
     const inputs = Array.from(document.querySelector("#fio_form") as HTMLFormElement) as HTMLInputElement[];
     inputs.forEach(input => person[input.id] = input.value.trim()
@@ -119,3 +113,4 @@ if (fromWLS) {
 
 export { doSearch, clearData, updatePoints };
 export { EGE, yesconf, nonconf };
+export type { TSetState };

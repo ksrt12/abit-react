@@ -20,6 +20,12 @@ interface IEGE {
 
 let person: IPerson, EGE: IEGE = {};
 
+/**
+ * Parse input string to object   
+ * @param pars Input string
+ * @param spl1 Splitter 1
+ * @param spl2 Splitter 2
+ */
 function getParamsFrom(pars: string, spl1: string, spl2: string): IPerson;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num: boolean): IEGE;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) {
@@ -34,6 +40,7 @@ function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) 
     }, {} as IPerson | IEGE);
 }
 
+/** Get person properties as object from window.location.search */
 function loadParams() {
     person = getParamsFrom(WLS.replace('?', ''), '&', '=');
     if (person.EGE) {
@@ -47,6 +54,7 @@ function loadParams() {
     makeName();
 }
 
+/** Function make full person name and set pid property via sha256 */
 function makeName() {
     person.NAME = `${person.LN} ${person.FN} ${person.MN}`.replace(/\s+/g, ' ');
     person.Dname = ((person.DN) ? person.DN + ' ' : '') + person.NAME;
@@ -56,6 +64,7 @@ function makeName() {
     person.pid = sha256(`${person.NAME} ${person.BD}`);
 };
 
+/** Validate and update points */
 function updatePoints(points: number, id: string) {
     const validPoints = (points < 0) ? 0 : (points > 100) ? 100 : points;
     EGE[subjects[id]] = validPoints;
@@ -63,6 +72,7 @@ function updatePoints(points: number, id: string) {
     return validPoints.toString();
 }
 
+/** Do olymps search from search button */
 function doSearch(rename: TSetState<string>, disable: TSetState<boolean>) {
     person = {};
     const inputs = Array.from(document.querySelector("#fio_form") as HTMLFormElement) as HTMLInputElement[];
@@ -77,6 +87,7 @@ function doSearch(rename: TSetState<string>, disable: TSetState<boolean>) {
         });
 }
 
+/** Reset all input points fields and remove olymps table */
 function clearData() {
     if (document.querySelector("#table")) {
         RemoveTable();
@@ -88,6 +99,7 @@ function clearData() {
     }
 }
 
+/** Insert non-empty olymps table into page */
 function checkTable(values: IOlymp[][]) {
     const trs = values.flat();
     if (trs.length) {
@@ -102,6 +114,7 @@ function checkTable(values: IOlymp[][]) {
     }
 }
 
+/** Auto-run search from window.location.search */
 function loadFromWLS() {
     loadParams();
     Promise.all(searchOlymps(person.pid)).then(checkTable);

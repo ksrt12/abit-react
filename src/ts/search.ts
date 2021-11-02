@@ -24,6 +24,7 @@ declare global {
     }
 }
 
+/** Parse olymp params */
 function getSubTitles(olympName: string) {
     return {
         name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
@@ -33,6 +34,7 @@ function getSubTitles(olympName: string) {
     };
 }
 
+/** Get olymps list for current year */
 function getOlymps(year: number, codes: ICodes[]): IOlymp[] {
     const trs = [];
     for (const d of codes) {
@@ -48,6 +50,7 @@ function getOlymps(year: number, codes: ICodes[]): IOlymp[] {
     return trs;
 }
 
+/** Get olymps from RSOSH */
 function loadDiplomaList(year: number, pid: string): Promise<IOlymp[]> {
     const s = document.createElement('script');
     s.async = false;
@@ -59,6 +62,7 @@ function loadDiplomaList(year: number, pid: string): Promise<IOlymp[]> {
     });
 }
 
+/** Get olymps from last 4 year*/
 function searchOlymps(personID: string) {
     const currYear = new Date().getFullYear();
     const years = [];

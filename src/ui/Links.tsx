@@ -1,11 +1,13 @@
 import PDFs from "../files/PDFs";
 
+/** Generate link */
 function Link(href: string, text: string, key = href) {
     return (
         <p key={key}><a href={href}>{text}</a></p>
     );
 }
 
+/** Make links */
 function Links() {
     const years = Object.keys(PDFs).reverse();
     const abit = "https://abit.itmo.ru";

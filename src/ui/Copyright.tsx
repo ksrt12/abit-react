@@ -1,3 +1,4 @@
+/** Copyright block  */
 const Copyright: React.FC = () => {
     return (
         <footer className="copyright">

@@ -14,6 +14,7 @@ interface IMyTable {
     trs: IOlymp[];
 }
 
+/** Make olymps table */
 const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
     const [stream, setStream] = useState("01.03.02");
     const [, setEge] = useState({});
@@ -34,6 +35,7 @@ const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
     );
 };
 
+/** Insert valid table into page */
 function InsertTable(caption: string, trs: IOlymp[]) {
     document.title = caption;
     ReactDOM.render(
@@ -45,6 +47,7 @@ function InsertTable(caption: string, trs: IOlymp[]) {
     }
 }
 
+/** Remove table from page */
 function RemoveTable() {
     ReactDOM.unmountComponentAtNode(results());
 }

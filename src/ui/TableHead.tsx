@@ -1,6 +1,7 @@
 import React from "react";
 import MakeSelector, { IStreamState } from "./MakeSelector";
 
+/** Sorting function */
 function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
     const target = event.target as any;
     const order = (target.dataset.order = -(target.dataset.order || -1));
@@ -17,6 +18,7 @@ function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
 
 }
 
+/** Make table head */
 const TableHead: React.FC<IStreamState> = React.memo((props) => {
     const heads = [
         'Олимпиада',

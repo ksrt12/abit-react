@@ -8,6 +8,7 @@ interface IMakeLink {
     code: number;
 }
 
+/** Make olymps link */
 const MakeLink: React.FC<IMakeLink> = ({ year, code }) => {
     return (
         <a href={`${RSROLYMP}${year}/by-code/${code}/white.pdf`}>
@@ -21,6 +22,7 @@ interface IOlympRow {
     stream: string;
 }
 
+/** Make olymp row */
 const OlympRow: React.FC<IOlympRow> = ({ stream, olymp }) => {
     const newStatus = checkBVI(stream, olymp);
 

@@ -28,6 +28,7 @@ interface IDefaultInput {
     key?: string | React.Key;
 }
 
+/** Make default input */
 const DefaultInput: React.FC<IDefaultInput> = ({ id, label, def, ...inputProps }) => {
     const [val, setVal] = useState(def || "");
     const validate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +52,7 @@ const DefaultInput: React.FC<IDefaultInput> = ({ id, label, def, ...inputProps }
     );
 };
 
+/** Make ege form */
 const EgeForm: React.FC = React.memo(() => {
     const ids = Object.keys(subjects);
     const getSubj = (id: string) => {
@@ -80,6 +82,7 @@ interface IFioForm {
     setDisable: TSetState<boolean>;
 }
 
+/** Make fio form */
 const FioForm: React.FC<IFioForm> = React.memo(({ setDisable }) => {
     const checkFio = (e: React.ChangeEvent<HTMLFormElement>) => {
         const form = e.target.form;
@@ -129,6 +132,7 @@ interface ISearchBtn extends IFioForm {
     isDisabled: boolean;
 }
 
+/** Make search button */
 const SearchBtn: React.FC<ISearchBtn> = ({ isDisabled, setDisable }) => {
     const [btnName, setBtnName] = useState("Проверить");
     const search = (e: React.MouseEvent<HTMLButtonElement>) => doSearch(setBtnName, setDisable);
@@ -138,6 +142,7 @@ const SearchBtn: React.FC<ISearchBtn> = ({ isDisabled, setDisable }) => {
     );
 };
 
+/** Make full search form */
 const SearchForm: React.FC = () => {
     const [isDisabled, setDisable] = useState(defs.dis);
     const props = { isDisabled, setDisable };

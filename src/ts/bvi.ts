@@ -4,6 +4,7 @@ import { setPointsColor } from "./colors";
 import { EGE, yesconf, nonconf } from "./diploma";
 import { IOlymp } from "./search";
 
+/** Check current olymp status by params */
 function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
     let status: string;
 
@@ -468,6 +469,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
     return status;
 }
 
+/** Check olymp confirmation by subject profile points */
 function checkConfNum(currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {
     const currEge = EGE[currSubj];
     const proof = (stream) ? multiSubjs![currSubj].includes(stream) : true;
@@ -478,6 +480,7 @@ function checkConfNum(currSubj: string, multiSubjs?: { [key: string]: string[]; 
     return proof && conf;
 }
 
+/** Check olymp confirmation by stream and subject profile */
 function checkConf(stream: string, olympProfile: string) {
     let stat = false;
     const confSubj = olympSubjBy[olympProfile];

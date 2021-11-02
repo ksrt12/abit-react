@@ -6,6 +6,7 @@ interface IStreamState {
     setStream: TSetState<string>;
 }
 
+/** Make streams selector */
 const MakeSelector: React.FC<IStreamState> = (props) => {
 
     const streams = [

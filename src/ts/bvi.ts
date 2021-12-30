@@ -5,12 +5,13 @@ import { EGE, yesconf, nonconf } from "./diploma";
 import { IOlymp } from "./search";
 
 /** Check current olymp status by params */
-function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
+function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
     let status: string;
 
     const ch75 = checkConf(stream, subj);
-    const bviORia = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;
-    const lvldip1 = (local_lvl: number) => (lvl === local_lvl && dip === 1) ? bvi : sto;
+    const bvi_wtf = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;
+    const bvi_sto = (local_lvl: number) => (lvl <= local_lvl) ? bvi : sto;
+    const lvldip1 = (local_lvl: number) => (lvl <= local_lvl && dip === 1) ? bvi : sto;
 
     if (subj === 'русский язык') {
         return (ch75 === yesconf) ? sto : wtf;
@@ -27,7 +28,9 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                     switch (name) {
                         case 'Олимпиада школьников "Ломоносов"':
                         case 'Всесибирская открытая олимпиада школьников':
-                            status = (lvl === 1 || lvl === 2) ? bvi : sto;
+                        case 'Олимпиада Университета Иннополис "Innopolis Open"':
+                        case 'Вузовско-академическая олимпиада по информатике':
+                            status = bvi_sto(2);
                             break;
                         case 'Московская олимпиада школьников':
                         case 'Олимпиада школьников по информатике и программированию':
@@ -37,11 +40,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                         case 'Открытая олимпиада школьников':
                         case 'Открытая олимпиада школьников по программированию':
                         case 'Всероссийская олимпиада школьников "Высшая проба"':
-                            status = (lvl === 1) ? bvi : sto;
-                            break;
-                        case 'Олимпиада Университета Иннополис "Innopolis Open"':
-                        case 'Вузовско-академическая олимпиада по информатике':
-                            status = (lvl === 3) ? sto : bvi;
+                            status = bvi_sto(1);
                             break;
                         default:
                             status = sto;
@@ -71,7 +70,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                         case 'Олимпиада школьников Санкт-Петербургского государственного университета':
                         case 'Санкт-Петербургская олимпиада школьников':
                         case 'Турнир городов':
-                            status = (lvl === 1) ? bvi : sto;
+                            status = bvi_sto(1);
                             break;
                         case 'Олимпиада школьников "Покори Воробьѐвы горы!"':
                         case 'Олимпиада школьников "Покори Воробьёвы горы!"':
@@ -91,7 +90,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                             break;
                         // case 'Турнир Ломоносова':
                         case 'Турнир имени М.В. Ломоносова':
-                            status = (lvl === 2) ? bvi : sto;
+                            status = bvi_sto(2);
                             break;
                         case 'Открытая олимпиада школьников':
                         case 'Межрегиональная олимпиада школьников по математике "САММАТ"':
@@ -121,7 +120,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
         case '09.03.02':
             switch (subj) {
                 case 'информатика':
-                    status = (lvl === 3) ? sto : bvi;
+                    status = bvi_sto(2);
                     break;
                 case 'программирование':
                 case 'искусственный интеллект':
@@ -131,7 +130,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                     status = (lvl === 3) ? (name === 'Открытая олимпиада школьников') ? bvi : sto : bvi;
                     break;
                 case 'большие данные и машинное обучение':
-                    status = (lvl === 2) ? bvi : sto;
+                    status = bvi_sto(2);
                     break;
                 // case 'информационные и коммуникационные технологии':
                 // case 'умный город':
@@ -163,7 +162,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                     status = bvi;
                     break;
                 // case 'информационные технологии':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 default:
                     status = wtf;
@@ -184,7 +183,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
         case '27.03.04':
             switch (subj) {
                 // case 'информационные технологии':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 case 'информатика':
                 case 'математика':
@@ -219,8 +218,10 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                 case 'автоматизация бизнес-процессов':
                 case 'умный город':
                 case 'большие данные и машинное обучение':
+                    status = bvi_sto(2);
+                    break;
                 case 'информатика и икт':
-                    status = bviORia(2);
+                    status = bvi_wtf(2);
                     break;
                 default:
                     status = wtf;
@@ -229,7 +230,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
         case '44.03.04':
             switch (subj) {
                 // case 'информационные технологии':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 case 'математика':
                 case 'информатика':
@@ -251,14 +252,14 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                     status = bvi;
                     break;
                 // case 'рисунок, живопись, скульптура, дизайн':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 // case 'рисунок':
                 // case 'архитектура, изобразительные и прикладные виды искусств':
                 // case 'автоматизация бизнес-процессов':
                 // case 'электроника и вычислительная техника':
                 // case 'большие данные и машинное обучение':
-                //     status = bviORia(2);
+                //     status = bvi_wtf(2);
                 //     break;
                 default:
                     status = wtf;
@@ -271,7 +272,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
         case '16.03.03':
             switch (subj) {
                 // case 'информационные технологии':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 // case 'информационные и коммуникационные технологии':
                 // case 'системы связи и дистанционного зондирования земли':
@@ -300,7 +301,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                 // case 'электроника и вычислительная техника':
                 // case 'космонавтика':
                 case 'информатика и икт':
-                    status = bviORia(2);
+                    status = bvi_wtf(2);
                     break;
                 default:
                     status = wtf;
@@ -332,7 +333,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
                 // case 'передовые производственные технологии':
                 // case 'космонавтика':
                 // case 'нейротехнологии и когнитивные науки':
-                //     status = bviORia(2);
+                //     status = bvi_wtf(2);
                 //     break;
                 default:
                     status = wtf;
@@ -366,7 +367,7 @@ function checkBVI(stream: string, { grad, lvl, dip, subj, name }: IOlymp) {
         case '38.03.05':
             switch (subj) {
                 // case 'информационные технологии':
-                //     status = bviORia(1);
+                //     status = bvi_wtf(1);
                 //     break;
                 case 'математика':
                 case 'информатика':

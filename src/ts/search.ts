@@ -28,8 +28,8 @@ declare global {
 function getSubTitles(olympName: string) {
     return {
         name: olympName.substring(olympName.indexOf('. "') + 3, olympName.indexOf('("') - 2).replace(/[«»]+/g, '"').trim(),
-        lvl: Number(olympName.substr(olympName.indexOf('уровень') - 2, 1).trim()),
-        dip: Number(olympName.substr(olympName.indexOf('Диплом') + 7, 1).trim()),
+        lvl: Number(olympName.substring(olympName.indexOf('уровень') - 2, olympName.indexOf('уровень') - 1).trim()),
+        dip: Number(olympName.substring(olympName.indexOf('Диплом') + 7, olympName.indexOf('Диплом') + 8).trim()),
         subj: olympName.substring(olympName.indexOf('("') + 2, olympName.indexOf('")')).toLowerCase().replace('cистемы', 'системы').trim(),
     };
 }

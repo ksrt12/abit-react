@@ -12,9 +12,9 @@ function Links() {
     const years = Object.keys(PDFs).reverse();
     const abit = "https://abit.itmo.ru";
     const links = [
-        { href: "/file/pages/82/rsosh_2021_bvi.pdf", name: "РСОШ 2021, дающие БВИ" },
-        { href: "/file/pages/82/100ballov_2021.pdf", name: "РСОШ 2021, дающие 100 баллов" },
-        { href: "/file/pages/82/vosh_2021.pdf", name: "ВСОШ(предметы и направления)" },
+        { href: "/file/pages/82/rsosh_2022_bvi.pdf", name: "РСОШ 2022, дающие БВИ" },
+        { href: "/file/pages/82/100ballov_2022.pdf", name: "РСОШ 2022, дающие 100 баллов" },
+        { href: "/file/pages/82/vosh_2022.pdf", name: "ВСОШ (предметы и направления)" },
         { href: "/page/101/", name: "Ответственные лица(бакалавриат)" },
         { href: "/page/102/", name: "Ответственные лица(магистратура)" }
     ];

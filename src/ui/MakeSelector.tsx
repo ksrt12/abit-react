@@ -15,7 +15,6 @@ const MakeSelector: React.FC<IStreamState> = (props) => {
         "09.03.03",
         "11.03.02",
         ...informatics,
-        "13.03.01",
         ...physics,
         ...chemistry,
         ...social,

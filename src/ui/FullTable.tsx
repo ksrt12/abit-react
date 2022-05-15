@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from 'react-dom';
+import React, { useState, useContext } from "react";
 import TableHead from "./TableHead";
 import OlympRow from "./Olymps";
-import { fromWLS } from "../ts/constants";
-import { IOlymp } from "../ts/search";
-
-const results = () => document.getElementById('results')!;
-
-let updateOutside = function (ege: any) { };
-
-interface IMyTable {
-    caption: string;
-    trs: IOlymp[];
-}
+import AppContext from "../context/AppContext";
 
 /** Make olymps table */
-const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
+const MyTable: React.FC = () => {
+    const { caption, trs } = useContext(AppContext);
     const [stream, setStream] = useState("01.03.02");
-    const [, setEge] = useState({});
     const state = { stream, setStream };
-
-    useEffect(() => {
-        updateOutside = ege => setEge({ ...ege });
-    }, []);
 
     return (
         <table id="table">
@@ -35,21 +20,4 @@ const MyTable: React.FC<IMyTable> = ({ caption, trs }) => {
     );
 };
 
-/** Insert valid table into page */
-function InsertTable(caption: string, trs: IOlymp[]) {
-    document.title = caption;
-    ReactDOM.render(
-        <MyTable caption={caption} trs={trs} />,
-        results()
-    );
-    if (window.screen.width < 930 || fromWLS) {
-        document.querySelector<HTMLDivElement>(".main")!.style.width = "fit-content";
-    }
-}
-
-/** Remove table from page */
-function RemoveTable() {
-    ReactDOM.unmountComponentAtNode(results());
-}
-
-export { InsertTable, RemoveTable, updateOutside };
+export default MyTable;

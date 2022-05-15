@@ -1,14 +1,15 @@
 import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
 import { olympSubjBy, ids, fromWLS } from "./constants";
 import { setPointsColor } from "./colors";
-import { EGE, yesconf, nonconf } from "./diploma";
+import { yesconf, nonconf } from "./diploma";
 import { IOlymp } from "./search";
+import { IEGE } from "../hooks/ege.hook";
 
 /** Check current olymp status by params */
-function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
+function checkBVI(EGE: IEGE, stream: string, { lvl, dip, subj, name }: IOlymp) {
     let status: string;
 
-    const ch75 = checkConf(stream, subj);
+    const ch75 = checkConf(EGE, stream, subj);
     const bvi_wtf = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;
     const bvi_sto = (local_lvl: number) => (lvl <= local_lvl) ? bvi : sto;
     const lvldip1 = (local_lvl: number) => (lvl <= local_lvl && dip === 1) ? bvi : sto;
@@ -29,7 +30,6 @@ function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
                         case 'Олимпиада школьников "Ломоносов"':
                         case 'Всесибирская открытая олимпиада школьников':
                         case 'Олимпиада Университета Иннополис "Innopolis Open"':
-                        case 'Вузовско-академическая олимпиада по информатике':
                             status = bvi_sto(2);
                             break;
                         case 'Московская олимпиада школьников':
@@ -39,8 +39,10 @@ function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
                         case 'Олимпиада школьников СПбГУ':
                         case 'Открытая олимпиада школьников':
                         case 'Открытая олимпиада школьников по программированию':
+                        case 'Открытая олимпиада школьников по программированию "Когнитивные технологии"':
                         case 'Всероссийская олимпиада школьников "Высшая проба"':
-                            status = bvi_sto(1);
+                        case 'Вузовско-академическая олимпиада по информатике':
+                            status = bvi_sto(3);
                             break;
                         default:
                             status = sto;
@@ -103,7 +105,7 @@ function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
                     }
                     break;
                 case 'большие данные и машинное обучение':
-                    status = lvldip1(2);
+                    status = (name === "Национальная технологическая олимпиада") ? lvldip1(2) : sto;
                     break;
                 // case 'информационные технологии':
                 // case 'информационные и коммуникационные технологии':
@@ -402,7 +404,7 @@ function checkBVI(stream: string, { lvl, dip, subj, name }: IOlymp) {
 }
 
 /** Check olymp confirmation by subject profile points */
-function checkConfNum(currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {
+function checkConfNum(EGE: IEGE, currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {
     const currEge = EGE[currSubj];
     const proof = (stream) ? multiSubjs![currSubj].includes(stream) : true;
     const conf = currEge >= confPoints;
@@ -413,7 +415,7 @@ function checkConfNum(currSubj: string, multiSubjs?: { [key: string]: string[]; 
 }
 
 /** Check olymp confirmation by stream and subject profile */
-function checkConf(stream: string, olympProfile: string) {
+function checkConf(EGE: IEGE, stream: string, olympProfile: string) {
     let stat = false;
     const confSubj = olympSubjBy[olympProfile];
     switch (typeof confSubj) {
@@ -423,14 +425,14 @@ function checkConf(stream: string, olympProfile: string) {
             return wtf;
         case 'object':
             for (const i of Object.keys(confSubj)) {
-                stat = checkConfNum(i, confSubj, stream);
+                stat = checkConfNum(EGE, i, confSubj, stream);
                 if (stat) {
                     break;
                 }
             }
             break;
         case 'string':
-            stat = checkConfNum(confSubj);
+            stat = checkConfNum(EGE, confSubj);
             break;
         default:
             alert("Ну параша, девки!");

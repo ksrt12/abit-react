@@ -1,5 +1,5 @@
 import { informatics, physics, chemistry, social } from "../ts/constants";
-import { TSetState } from "../ts/diploma";
+import { TSetState } from "./SearchForm";
 
 interface IStreamState {
     stream: string;

@@ -9,7 +9,15 @@ const colors = {
 
 /** Set subject input colors */
 function setPointsColor(id: string, isStream: boolean, isEmpty?: boolean, isConf?: boolean) {
-    [(document.querySelector(`[for=${id}]`) as HTMLLabelElement).style.backgroundColor, (document.querySelector(`#${id}`) as HTMLInputElement).style.borderColor] = isStream ? isEmpty ? colors.empty : isConf ? colors.normal : colors.noConf : colors.normal;
+    [(document.querySelector(`[for=${id}]`) as HTMLLabelElement).style.backgroundColor,
+    (document.querySelector(`#${id}`) as HTMLInputElement).style.borderColor] =
+        isStream ?
+            isEmpty ?
+                colors.empty :
+                isConf ?
+                    colors.normal
+                    : colors.noConf
+            : colors.normal;
 }
 
 /** Set olymp rows colors if olymp status is bvi or sto */

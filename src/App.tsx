@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Links from "./ui/Links";
 import SearchForm from "./ui/SearchForm";
 import Copyright from "./ui/Copyright";
@@ -10,7 +11,6 @@ import AppContext from "./context/AppContext";
 import { fromWLS } from "./ts/constants";
 import { loadParams } from "./ts/diploma";
 import { searchOlymps } from "./ts/search";
-import { useEffect } from "react";
 
 function App() {
     const { ready, updateTable, ...argsTable } = useTable();

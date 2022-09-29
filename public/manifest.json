@@ -1,6 +1,6 @@
 {
-  "short_name": "Abit React",
-  "name": "Create React App Sample",
+  "short_name": "Олимпиады РСОШ",
+  "name": "Поиск и проверка олимпиад РСОШ",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,27 +1,27 @@
 import { RSROLYMP } from "./constants";
 
 interface ICodes {
-    code: number,
-    oa: string,
-    name: string,
-    form: number,
-    hashed: string;
+  code: number,
+  oa: string,
+  name: string,
+  form: number,
+  hashed: string;
 }
 
 interface IOlymp {
-    name: string;
-    lvl: number;
-    dip: number;
-    subj: string;
-    year: number;
-    code: number;
-    grad: number;
+  name: string;
+  lvl: number;
+  dip: number;
+  subj: string;
+  year: number;
+  code: number;
+  grad: number;
 }
 
 declare global {
-    interface Window {
-        diplomaCodes: ICodes[];
-    }
+  interface Window {
+    diplomaCodes: ICodes[];
+  }
 }
 
 /** Parse olymp params */

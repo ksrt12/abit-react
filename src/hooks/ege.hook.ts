@@ -1,8 +1,6 @@
 import { useState, useCallback } from "react";
 
-export interface IEGE {
-    [index: string]: number;
-}
+export type IEGE = Record<string, number>;
 
 const useEge = () => {
   const [EGE, setEGE] = useState<IEGE>({});

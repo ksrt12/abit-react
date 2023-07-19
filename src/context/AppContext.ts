@@ -1,19 +1,35 @@
-import { createContext } from 'react';
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { createContext } from "react";
 import { IEGE } from "../hooks/ege.hook";
 import { IPerson } from "../hooks/person.hook";
 import { IOlymp } from "../ts/search";
 
-const AppContext = createContext({
-    ready: false,
-    setReady: (newState: boolean): void => { },
-    caption: "",
-    setCaption: (newState: string): void => { },
-    trs: [] as IOlymp[],
-    setTrs: (newState: IOlymp[]): void => { },
-    updateTable: (abit_caption: string, abit_trs: IOlymp[]) => { },
-    EGE: {} as IEGE,
-    updateEGE: (newState: IEGE): void => { },
-    person: {} as IPerson,
-    updatePerson: (newState: IPerson): void => { },
+type IAppContext = {
+  ready: boolean,
+  setReady: (newState: boolean) => void,
+  caption: string,
+  setCaption: (newState: string) => void,
+  trs: IOlymp[],
+  setTrs: (newState: IOlymp[]) => void,
+  updateTable: (abit_caption: string, abit_trs: IOlymp[]) => void,
+  EGE: IEGE,
+  updateEGE: (newState: IEGE) => void,
+  person: IPerson,
+  updatePerson: (newState: IPerson) => void,
+};
+
+const AppContext = createContext<IAppContext>({
+  ready: false,
+  setReady: () => { },
+  caption: "",
+  setCaption: () => { },
+  trs: [] as IOlymp[],
+  setTrs: () => { },
+  updateTable: () => { },
+  EGE: {} as IEGE,
+  updateEGE: () => { },
+  person: {} as IPerson,
+  updatePerson: () => { },
 });
 export default AppContext;

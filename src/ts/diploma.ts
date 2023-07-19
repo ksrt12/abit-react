@@ -4,11 +4,11 @@ import { IEGE } from "../hooks/ege.hook";
 import { IPerson } from "../hooks/person.hook";
 import { subjects, WLS } from "./constants";
 
-let nonconf = ' Не подтв.',
-    yesconf = ' Подтв.';
+let nonconf = " Не подтв.",
+  yesconf = " Подтв.";
 
 /**
- * Parse input string to object   
+ * Parse input string to object
  * @param pars Input string
  * @param spl1 Splitter 1
  * @param spl2 Splitter 2
@@ -16,40 +16,41 @@ let nonconf = ' Не подтв.',
 function getParamsFrom(pars: string, spl1: string, spl2: string): IPerson;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num: boolean): IEGE;
 function getParamsFrom(pars: string, spl1: string, spl2: string, num?: boolean) {
-    return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
-        const [key, val]: string[] = e.split(spl2);
-        if (num) {
-            p[key.toLowerCase()] = Number(val);
-        } else {
-            p[key] = val;
-        }
-        return p;
-    }, {} as IPerson | IEGE);
-}
-
-/** Get person properties as object from window.location.search */
-function loadParams() {
-    let ege: IEGE = {};
-    const person = getParamsFrom(WLS.replace('?', ''), '&', '=');
-    if (person.EGE) {
-        ege = getParamsFrom(person.EGE, ',', ':', true);
+  return decodeURIComponent(pars).split(spl1).reduce((p, e) => {
+    const [key, val]: string[] = e.split(spl2);
+    if (num) {
+      p[key.toLowerCase()] = Number(val);
     } else {
-        // set default EGE points as 100
-        Object.values(subjects).forEach(subj => ege[subj] = 100);
-        yesconf = '';
-        nonconf = '';
+      p[key] = val;
     }
-    return { ege, ...makeName(person) };
+    return p;
+  }, {} as IPerson | IEGE);
 }
 
 const checkFIO = (s: string) => s.trim().toLowerCase().replace(/(([- ]|^)[^ ])/g, (s: string) => s.toUpperCase());
 
 const makeName = (person: IPerson) => {
-    const NAME = `${checkFIO(person.LN)} ${checkFIO(person.FN)} ${checkFIO(person.MN)}`.replace(/\s+/g, ' ');
-    const Dname = ((person.DN) ? person.DN + ' ' : '') + NAME;
-    const BD = (person.BDY) ? `${person.BDY}-${person.BDM}-${person.BDD}` : person.BD;
-    const pid = sha256(`${NAME} ${BD}`);
-    return { NAME, Dname, BD, pid };
+  const NAME = `${checkFIO(person.LN)} ${checkFIO(person.FN)} ${checkFIO(person.MN)}`.replace(/\s+/g, " ");
+  const Dname = ((person.DN) ? person.DN + " " : "") + NAME;
+  const BD = (person.BDY) ? `${person.BDY}-${person.BDM}-${person.BDD}` : person.BD;
+  const pid = sha256(`${NAME} ${BD}`);
+  return { NAME, Dname, BD, pid };
 };
+
+/** Get person properties as object from window.location.search */
+function loadParams() {
+  let ege: IEGE = {};
+  const person = getParamsFrom(WLS.replace("?", ""), "&", "=");
+  if (person.EGE) {
+    ege = getParamsFrom(person.EGE, ",", ":", true);
+  } else {
+    // set default EGE points as 100
+    Object.values(subjects).forEach(subj => ege[subj] = 100);
+    yesconf = "";
+    nonconf = "";
+  }
+  return { ege, ...makeName(person) };
+}
+
 
 export { yesconf, nonconf, getParamsFrom, makeName, loadParams };

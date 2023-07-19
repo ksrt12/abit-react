@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "@itmo/eslint-config/react"
+  ],
+  "ignorePatterns": [
+    "*.config.js"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off"
+  }
+}

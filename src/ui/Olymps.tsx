@@ -2,44 +2,44 @@ import { RSROLYMP } from "../ts/constants";
 import { colorBVI } from "../ts/colors";
 import { checkBVI } from "../ts/bvi";
 import { IOlymp } from "../ts/search";
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import AppContext from "../context/AppContext";
 
 interface IMakeLink {
-    year: number;
-    code: number;
+  year: number;
+  code: number;
 }
 
 /** Make olymps link */
-const MakeLink: React.FC<IMakeLink> = ({ year, code }) => {
-    return (
-        <a href={`${RSROLYMP}${year}/by-code/${code}/white.pdf`}>
-            {code.toString().replace(/([0-9]{3})([0-9]{4})([0-9]{4})/, '$1 $2-$3')}
-        </a>
-    );
+const MakeLink: FC<IMakeLink> = ({ year, code }) => {
+  return (
+    <a href={`${RSROLYMP}${year}/by-code/${code}/white.pdf`}>
+      {code.toString().replace(/([0-9]{3})([0-9]{4})([0-9]{4})/, "$1 $2-$3")}
+    </a>
+  );
 };
 
 interface IOlympRow {
-    olymp: IOlymp;
-    stream: string;
+  olymp: IOlymp;
+  stream: string;
 }
 
 /** Make olymp row */
-const OlympRow: React.FC<IOlympRow> = ({ stream, olymp }) => {
-    const { EGE } = useContext(AppContext);
-    const newStatus = checkBVI(EGE, stream, olymp);
+const OlympRow: FC<IOlympRow> = ({ stream, olymp }) => {
+  const { EGE } = useContext(AppContext);
+  const newStatus = checkBVI(EGE, stream, olymp);
 
-    return (
-        <tr style={{ backgroundColor: colorBVI(newStatus) }}>
-            <td>{olymp.name}</td>
-            <td>{olymp.lvl}</td>
-            <td>{olymp.dip}</td>
-            <td>{olymp.subj}</td>
-            <td><MakeLink code={olymp.code} year={olymp.year} /></td>
-            <td>{olymp.grad}</td>
-            <td>{newStatus}</td>
-        </tr>
-    );
+  return (
+    <tr style={{ backgroundColor: colorBVI(newStatus) }}>
+      <td>{olymp.name}</td>
+      <td>{olymp.lvl}</td>
+      <td>{olymp.dip}</td>
+      <td>{olymp.subj}</td>
+      <td><MakeLink code={olymp.code} year={olymp.year} /></td>
+      <td>{olymp.grad}</td>
+      <td>{newStatus}</td>
+    </tr>
+  );
 };
 
 export default OlympRow;

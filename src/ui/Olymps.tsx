@@ -1,9 +1,6 @@
-import { RSROLYMP } from "../ts/constants";
-import { colorBVI } from "../ts/colors";
-import { checkBVI } from "../ts/bvi";
-import { IOlymp } from "../ts/search";
 import { FC, useContext } from "react";
-import AppContext from "../context/AppContext";
+import { AppContext } from "@/context";
+import { RSROLYMP, IOlymp, checkBVI, colorBVI } from "@/ts";
 
 interface IMakeLink {
   year: number;
@@ -25,7 +22,7 @@ interface IOlympRow {
 }
 
 /** Make olymp row */
-const OlympRow: FC<IOlympRow> = ({ stream, olymp }) => {
+export const OlympRow: FC<IOlympRow> = ({ stream, olymp }) => {
   const { EGE } = useContext(AppContext);
   const newStatus = checkBVI(EGE, stream, olymp);
 
@@ -41,5 +38,3 @@ const OlympRow: FC<IOlympRow> = ({ stream, olymp }) => {
     </tr>
   );
 };
-
-export default OlympRow;

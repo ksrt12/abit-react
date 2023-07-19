@@ -1,9 +1,6 @@
-import { bvi, sto, ia, itin, wtf, confPoints } from "./constants";
-import { olympSubjBy, ids, fromWLS } from "./constants";
-import { setPointsColor } from "./colors";
-import { yesconf, nonconf } from "./diploma";
-import { IOlymp } from "./search";
-import { IEGE } from "../hooks/ege.hook";
+import { bvi, sto, ia, itin, wtf, confPoints, fromWLS, ids, olympSubjBy } from "@/ts";
+import { IOlymp, nonconf, setPointsColor, yesconf } from "@/ts";
+import { IEGE } from "@/hooks";
 
 /** Check olymp confirmation by subject profile points */
 function checkConfNum(EGE: IEGE, currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {

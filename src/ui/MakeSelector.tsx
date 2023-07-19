@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { informatics, physics, chemistry, social } from "../ts/constants";
-import { TSetState } from "./SearchForm";
+import { informatics, physics, chemistry, social } from "@/ts";
+import { TSetState } from "@/ui";
 
 interface IStreamState {
   stream: string;
@@ -8,7 +8,7 @@ interface IStreamState {
 }
 
 /** Make streams selector */
-const MakeSelector: FC<IStreamState> = ({ stream, setStream }) => {
+export const MakeSelector: FC<IStreamState> = ({ stream, setStream }) => {
 
   const streams = [
     "01.03.02",
@@ -33,5 +33,4 @@ const MakeSelector: FC<IStreamState> = ({ stream, setStream }) => {
   );
 };
 
-export default MakeSelector;
 export type { IStreamState };

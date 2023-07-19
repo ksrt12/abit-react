@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 /** Copyright block  */
-const Footer: FC = () => {
+export const Footer: FC = () => {
   return (
     <footer className="copyright">
       <a href="https://isu.ksrt12.ru">Скрипты</a>
@@ -10,5 +10,3 @@ const Footer: FC = () => {
     </footer>
   );
 };
-
-export default Footer;

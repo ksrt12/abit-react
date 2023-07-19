@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { IOlymp } from "../ts/search";
+import { IOlymp } from "@/ts";
 
-const useSearch = (updateTable: (abit_caption: string, abit_trs: IOlymp[]) => void, fromWLS: boolean) => {
+export const useSearch = (updateTable: (abit_caption: string, abit_trs: IOlymp[]) => void, fromWLS: boolean) => {
   const checkTable = useCallback((values: IOlymp[][], Dname: string) => {
     const trs = values.flat();
     if (trs.length) {
@@ -21,5 +21,3 @@ const useSearch = (updateTable: (abit_caption: string, abit_trs: IOlymp[]) => vo
   }, [updateTable, fromWLS]);
   return checkTable;
 };
-
-export default useSearch;

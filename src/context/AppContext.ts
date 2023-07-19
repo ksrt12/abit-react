@@ -19,7 +19,7 @@ type IAppContext = {
   updatePerson: (newState: IPerson) => void,
 };
 
-const AppContext = createContext<IAppContext>({
+export const AppContext = createContext<IAppContext>({
   ready: false,
   setReady: () => { },
   caption: "",
@@ -32,4 +32,3 @@ const AppContext = createContext<IAppContext>({
   person: {} as IPerson,
   updatePerson: () => { },
 });
-export default AppContext;

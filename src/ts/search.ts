@@ -1,4 +1,4 @@
-import { RSROLYMP } from "./constants";
+import { RSROLYMP } from "@/ts";
 
 interface ICodes {
   code: number,

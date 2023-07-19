@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import MakeSelector, { IStreamState } from "./MakeSelector";
+import { IStreamState, MakeSelector } from "@/ui";
 
 /** Sorting function */
 function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
@@ -19,7 +19,7 @@ function getSort(event: React.MouseEvent<HTMLTableCellElement>) {
 }
 
 /** Make table head */
-const TableHead: FC<IStreamState> = React.memo((props) => {
+export const TableHead: FC<IStreamState> = React.memo((props) => {
   const heads = [
     "Олимпиада",
     "Уровень",
@@ -41,5 +41,3 @@ const TableHead: FC<IStreamState> = React.memo((props) => {
 });
 
 TableHead.displayName = "TableHead";
-
-export default TableHead;

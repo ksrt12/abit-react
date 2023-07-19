@@ -1,10 +1,9 @@
-import React, { useState, useContext, FC } from "react";
-import TableHead from "./TableHead";
-import OlympRow from "./Olymps";
-import AppContext from "../context/AppContext";
+import { AppContext } from "@/context";
+import { useState, useContext, FC } from "react";
+import { OlympRow, TableHead } from "@/ui";
 
 /** Make olymps table */
-const MyTable: FC = () => {
+export const MyTable: FC = () => {
   const { caption, trs } = useContext(AppContext);
   const [stream, setStream] = useState("01.03.02");
   const state = { stream, setStream };
@@ -19,5 +18,3 @@ const MyTable: FC = () => {
     </table>
   );
 };
-
-export default MyTable;

@@ -1,8 +1,8 @@
 
 import { sha256 } from "js-sha256";
-import { IEGE } from "../hooks/ege.hook";
-import { IPerson } from "../hooks/person.hook";
-import { subjects, WLS } from "./constants";
+import { IPerson, IEGE } from "@/hooks";
+import { WLS, subjects } from "@/ts";
+
 
 let nonconf = " Не подтв.",
   yesconf = " Подтв.";

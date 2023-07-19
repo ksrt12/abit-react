@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { IOlymp } from "../ts/search";
+import { IOlymp } from "@/ts";
 
-const useTable = () => {
+export const useTable = () => {
 
   const [ready, setReadyLocal] = useState(false);
   const [caption, setCaptionLocal] = useState("");
@@ -19,5 +19,3 @@ const useTable = () => {
 
   return { ready, setReady, caption, setCaption, trs, setTrs, updateTable };
 };
-
-export default useTable;

@@ -1,9 +1,7 @@
 import React, { FC, PropsWithChildren, useContext, useState } from "react";
-import AppContext from "../context/AppContext";
-import useSearch from "../hooks/search.hook";
-import { searchOlymps } from "../ts/search";
-import { makeName } from "../ts/diploma";
-import { fromWLS, subjects } from "../ts/constants";
+import { AppContext } from "@/context";
+import { useSearch } from "@/hooks";
+import { subjects, fromWLS, makeName, searchOlymps } from "@/ts";
 
 interface IDefs {
   dis: boolean;
@@ -189,7 +187,7 @@ const SearchBtn: FC<ISearchBtn> = ({ isDisabled, setDisable }) => {
 };
 
 /** Make full search form */
-const SearchForm: FC = () => {
+export const SearchForm: FC = () => {
   const [isDisabled, setDisable] = useState(defs.dis);
   const props = { isDisabled, setDisable };
 
@@ -203,5 +201,3 @@ const SearchForm: FC = () => {
     </div>
   );
 };
-
-export default SearchForm;

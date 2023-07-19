@@ -1,16 +1,8 @@
 import { useEffect } from "react";
-import SearchForm from "./ui/SearchForm";
-import Copyright from "./ui/Footer";
-import MyTable from "./ui/FullTable";
-import Links from "./ui/Links";
-import useTable from "./hooks/table.hook";
-import useEge from "./hooks/ege.hook";
-import usePerson from "./hooks/person.hook";
-import useSearch from "./hooks/search.hook";
-import AppContext from "./context/AppContext";
-import { fromWLS } from "./ts/constants";
-import { loadParams } from "./ts/diploma";
-import { searchOlymps } from "./ts/search";
+import { AppContext } from "@/context";
+import { Links, SearchForm, MyTable, Footer } from "@/ui";
+import { useEge, usePerson, useSearch, useTable } from "@/hooks";
+import { fromWLS, loadParams, searchOlymps } from "@/ts";
 
 function App() {
   const { ready, updateTable, ...argsTable } = useTable();
@@ -39,7 +31,7 @@ function App() {
           </div>
         </div>
       </div>
-      <Copyright />
+      <Footer />
     </AppContext.Provider>
   );
 }

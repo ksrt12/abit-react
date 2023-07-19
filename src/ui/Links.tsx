@@ -9,11 +9,11 @@ function Link(href: string, text: string) {
 function Links() {
   const abit = "https://abit.itmo.ru";
   const links = [
-    { href: "/file/pages/82/rsosh_2022_bvi.pdf", name: "РСОШ 2022, дающие БВИ" },
-    { href: "/file/pages/82/100ballov_2022.pdf", name: "РСОШ 2022, дающие 100 баллов" },
+    { href: "/file/pages/82/rsosh_2023_bvi.pdf", name: "РСОШ 2023, дающие БВИ" },
+    { href: "/file/pages/82/100ballov_2023.pdf", name: "РСОШ 2023, дающие 100 баллов" },
     { href: "/file/pages/82/vosh_2022.pdf", name: "ВСОШ (предметы и направления)" },
-    { href: "/page/101/", name: "Ответственные лица(бакалавриат)" },
-    { href: "/page/102/", name: "Ответственные лица(магистратура)" },
+    { href: "/contacts", name: "Ответственные лица (бакалавриат)" },
+    { href: "/contacts", name: "Ответственные лица (магистратура)" },
   ];
 
   const years = [2018, 2019, 2020, 2021];

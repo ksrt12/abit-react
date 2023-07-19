@@ -16,7 +16,7 @@
   "scripts": {
     "eslint:lint": "eslint --ext .ts,.tsx,.js --ignore-path .gitignore .",
     "eslint:fix": "yarn eslint:lint --fix",
-    "predeploy": "npm run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build -m \"$(git show -s --format='Update from %h: %s')\"",
     "start": "react-scripts start",
     "build": "react-scripts build",

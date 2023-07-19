@@ -11,7 +11,7 @@ function Links() {
   const links = [
     { href: "/file/pages/82/rsosh_2023_bvi.pdf", name: "РСОШ 2023, дающие БВИ" },
     { href: "/file/pages/82/100ballov_2023.pdf", name: "РСОШ 2023, дающие 100 баллов" },
-    { href: "/file/pages/82/vosh_2022.pdf", name: "ВСОШ (предметы и направления)" },
+    { href: "/file/pages/82/vosh_2023.pdf", name: "ВСОШ (предметы и направления)" },
     { href: "/contacts", name: "Ответственные лица (бакалавриат)" },
     { href: "/contacts", name: "Ответственные лица (магистратура)" },
   ];

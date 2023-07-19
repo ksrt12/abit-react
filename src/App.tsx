@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import SearchForm from "./ui/SearchForm";
-import Copyright from "./ui/Copyright";
+import Copyright from "./ui/Footer";
 import MyTable from "./ui/FullTable";
+import Links from "./ui/Links";
 import useTable from "./hooks/table.hook";
 import useEge from "./hooks/ege.hook";
 import usePerson from "./hooks/person.hook";
@@ -30,7 +31,7 @@ function App() {
   return (
     <AppContext.Provider value={{ ready, updateTable, ...argsTable, EGE, updateEGE, ...usePerson() }}>
       <div className="content">
-        {/* <Links /> */}
+        <Links />
         <div className="main">
           {!fromWLS && <SearchForm />}
           <div id="results">

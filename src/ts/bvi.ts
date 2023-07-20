@@ -411,6 +411,15 @@ function checkBVI(EGE: IEGE, stream: string, { lvl, dip, subj, name }: IOlymp) {
       }
       break;
     case "27.03.05":
+      switch (subj) {
+        case "биология":
+        case "экология":
+          status = bvi;
+          break;
+        default:
+          status = wtf;
+      }
+      break;
     case "38.03.05":
       switch (subj) {
         // case 'информационные технологии':

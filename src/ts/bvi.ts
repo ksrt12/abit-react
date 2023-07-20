@@ -1,4 +1,4 @@
-import { bvi, sto, ia, itin, wtf, confPoints, fromWLS, ids, olympSubjBy } from "@/ts";
+import { bvi, sto, itin, wtf, confPoints, fromWLS, ids, olympSubjBy } from "@/ts";
 import { IOlymp, nonconf, setPointsColor, yesconf } from "@/ts";
 import { IEGE } from "@/hooks";
 
@@ -44,7 +44,6 @@ function checkBVI(EGE: IEGE, stream: string, { lvl, dip, subj, name }: IOlymp) {
   let status: string;
 
   const ch75 = checkConf(EGE, stream, subj);
-  const bvi_wtf = (local_lvl: number) => (lvl === local_lvl) ? bvi : ia;
   const bvi_sto = (local_lvl: number) => (lvl <= local_lvl) ? bvi : sto;
   const lvldip1 = (local_lvl: number) => (lvl <= local_lvl && dip === 1) ? bvi : sto;
 
@@ -349,9 +348,9 @@ function checkBVI(EGE: IEGE, stream: string, { lvl, dip, subj, name }: IOlymp) {
         // case 'программирование':
         // case 'электроника и вычислительная техника':
         // case 'космонавтика':
-        case "информатика и икт":
-          status = bvi_wtf(2);
-          break;
+        // case "информатика и икт":
+        //   status = bvi_wtf(2);
+        //   break;
         default:
           status = wtf;
       }

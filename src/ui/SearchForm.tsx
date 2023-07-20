@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useContext, useState } from "react";
+import React, { Dispatch, FC, PropsWithChildren, SetStateAction, useContext, useState, ChangeEvent } from "react";
 import { AppContext } from "@/context";
 import { useSearch } from "@/hooks";
 import { subjects, fromWLS, makeName, searchOlymps } from "@/ts";
@@ -29,14 +29,14 @@ interface IDefaultInput {
   key?: string | React.Key;
 }
 
-export type TSetState<T> = React.Dispatch<React.SetStateAction<T>>;
+export type TSetState<T> = Dispatch<SetStateAction<T>>;
 
 /** Make default input */
 const DefaultInput: FC<IDefaultInput> = ({ id, label, def, ...inputProps }) => {
   const [val, setVal] = useState(def || "");
   const { EGE, updateEGE } = useContext(AppContext);
 
-  const validate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validate = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const target = e.target;

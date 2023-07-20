@@ -2,7 +2,7 @@ import { FC } from "react";
 import { informatics, physics, chemistry, social } from "@/ts";
 import { TSetState } from "@/ui";
 
-interface IStreamState {
+export interface IStreamState {
   stream: string;
   setStream: TSetState<string>;
 }
@@ -32,5 +32,3 @@ export const MakeSelector: FC<IStreamState> = ({ stream, setStream }) => {
     </select>
   );
 };
-
-export type { IStreamState };

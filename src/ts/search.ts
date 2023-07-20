@@ -8,7 +8,7 @@ interface ICodes {
   hashed: string;
 }
 
-interface IOlymp {
+export interface IOlymp {
   name: string;
   lvl: number;
   dip: number;
@@ -73,4 +73,3 @@ function searchOlymps(personID: string) {
 }
 
 export { searchOlymps };
-export type { IOlymp };

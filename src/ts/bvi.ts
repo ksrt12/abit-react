@@ -3,7 +3,7 @@ import { IOlymp, nonconf, setPointsColor, yesconf } from "@/ts";
 import { IEGE } from "@/hooks";
 
 /** Check olymp confirmation by subject profile points */
-function checkConfNum(EGE: IEGE, currSubj: string, multiSubjs?: { [key: string]: string[]; }, stream?: string) {
+function checkConfNum(EGE: IEGE, currSubj: string, multiSubjs?: Record<string, string[]>, stream?: string) {
   const currEge = EGE[currSubj];
   const proof = Boolean((stream) ? multiSubjs && multiSubjs[currSubj].includes(stream) : true);
   const conf = currEge >= confPoints;
@@ -66,9 +66,11 @@ function checkBVI(EGE: IEGE, stream: string, { lvl, dip, subj, name }: IOlymp) {
             case "Олимпиада школьников по информатике и программированию":
             case "Олимпиада школьников Санкт-Петербургского государственного университета":
             case "Олимпиада школьников СПбГУ":
-            case "Открытая олимпиада школьников":
             case "Открытая олимпиада школьников по программированию":
               status = bvi_sto(1);
+              break;
+            case "Открытая олимпиада школьников":
+              status = lvldip1(1);
               break;
             case "Олимпиада школьников \"Ломоносов\"":
             case "Всесибирская открытая олимпиада школьников":

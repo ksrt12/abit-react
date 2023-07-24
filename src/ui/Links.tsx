@@ -6,9 +6,9 @@ type TLink = {
 };
 
 const links: TLink[] = [
-  { href: "/file/pages/82/rsosh_2023_bvi.pdf", name: "РСОШ 2023, дающие БВИ" },
-  { href: "/file/pages/82/100ballov_2023.pdf", name: "РСОШ 2023, дающие 100 баллов" },
-  { href: "/file/pages/82/vosh_2023.pdf", name: "ВСОШ (предметы и направления)" },
+  { href: "/file_storage/file/pages/82/rsosh_bvi_2023.pdf", name: "РСОШ 2023, дающие БВИ" },
+  { href: "/file_storage/file/pages/82/rsosh_100_2023.pdf", name: "РСОШ 2023, дающие 100 баллов" },
+  { href: "/file_storage/file/pages/82/vsosh_2023.pdf", name: "ВСОШ (предметы и направления)" },
   { href: "/contacts", name: "Ответственные лица (бакалавриат)" },
   { href: "/contacts", name: "Ответственные лица (магистратура)" },
 ];

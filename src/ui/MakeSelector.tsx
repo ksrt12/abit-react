@@ -13,8 +13,6 @@ export const MakeSelector: FC<IStreamState> = ({ stream, setStream }) => {
   const streams = [
     "01.03.02",
     "09.03.02",
-    "09.03.03",
-    "11.03.02",
     ...informatics,
     ...physics,
     ...chemistry,

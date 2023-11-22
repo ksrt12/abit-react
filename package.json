@@ -23,6 +23,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
+    "check:circular": "madge --circular --extensions ts,tsx,js,jsx src",
+    "check:image": "madge --extensions ts,tsx,js,jsx src --image graph.svg",
     "update": "npx npm-check-updates -u && npm install",
     "server": "serve -s build"
   },
